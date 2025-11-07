@@ -18,15 +18,16 @@
     <div id="main-content-wrapper">
         <div id="toc-panel">
             <div id="toc">
-                <button id="neoclassical" class="toc-entry" onclick="changeTab(0)" style="font-weight: bold;">The Basic Neoclassical Growth Model</button>
-                <button id="nonneutralTFP" class="toc-entry" onclick="changeTab(1)">Modeling Non-Neutral TFP</button>
-                <button id="evidenceIntangible" class="toc-entry" onclick="changeTab(2)">Evidence of Increased Intangible Investment</button>
-                <button id="intangible" class="toc-entry" onclick="changeTab(3)">Extended Theory With Intangible Investment</button>
+                <button id="introduction" class="toc-entry" onclick="changeTab(0)" style="font-weight: bold;">Introduction</button>
+                <button id="neoclassical" class="toc-entry" onclick="changeTab(1)">The Basic Neoclassical Growth Model</button>
+                <button id="nonneutralTFP" class="toc-entry" onclick="changeTab(2)">Modeling Non-Neutral TFP</button>
+                <button id="evidenceIntangible" class="toc-entry" onclick="changeTab(3)">Evidence of Increased Intangible Investment</button>
+                <button id="intangible" class="toc-entry" onclick="changeTab(4)">Extended Theory With Intangible Investment</button>
             </div>
-            <div id="toc-toggle">≡</div>
+            <div id="toc-toggle">◀</div>
         </div>
         
-        <iframe id="notebook" src="neoclassical.html" frameborder="0"></iframe>
+        <iframe id="notebook" src="introduction.html" frameborder="0"></iframe>
     </div>
     
 
@@ -55,12 +56,18 @@
         const panel = document.getElementById('toc-panel');
         const arrow = document.getElementById('toc-toggle');
 
+        let isHidden = false;
+
         arrow.addEventListener('click', () => {
             panel.classList.toggle('hidden');
-            console.log("ABC")
+
+            isHidden = !isHidden;
+            arrow.textContent = isHidden ? "▶" : "◀";
         });
 
         // Tab Contents
+
+        let introduction = {name: "introduction", title: "Introduction"}
 
         let intangible = {name: "intangible", title: "Extended Theory with Intangible Investment"}
 
@@ -70,7 +77,7 @@
 
         let neoclassical = {name: "neoclassical", title: "The Basic Neoclassical Growth Model"}
 
-        let tabContents = [neoclassical, nonneutralTFP, evidenceIntangible, intangible]
+        let tabContents = [introduction, neoclassical, nonneutralTFP, evidenceIntangible, intangible]
 
         let tabIdx = 0
 
