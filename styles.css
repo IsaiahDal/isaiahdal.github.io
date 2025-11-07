@@ -1,0 +1,164 @@
+/* Font-size & typeface */
+* {  
+    font-family: 'Montserrat', sans-serif;
+    font-size: max(1vw, 10px);
+} 
+
+/* HEADER */
+header {
+    background-color: #01154f;
+    color: white; 
+    height: 15vh;
+    margin: 0px;
+    min-width: 1000px;
+    padding: 15px;
+    text-align: center;
+}
+
+    /* Title */
+    header h1 a { 
+        color: white;
+        font-size: 2.5rem;
+        text-decoration: none;
+    }
+
+    /* Author */
+    header a, footer a { 
+        color: white;
+        font-size: 1.5rem;
+        text-decoration: none;
+    }
+
+    header a:hover, header h1 a:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+body { 
+    margin: 0px 
+}
+
+/* NOTEBOOK PAGES */
+#main-content-wrapper { 
+    display: flex;
+    gap: 20px;
+    height: 80vh;
+}
+
+#notebook {
+    width: 100%;
+    height: 80vh;
+}
+
+#toc {
+    background-color: rgb(235, 235, 235);
+    border-radius: 0.5vw;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    height: fit-content;
+    left: 1vw;
+    position: absolute;
+    top: 0;
+    width: 15vw;
+    z-index: 3;
+}
+.toc-entry {
+    background-color: transparent;
+    border: none;
+    font-size: 0.7rem;
+    padding-bottom: 1vh;
+    padding-top: 1vh;
+    text-align: left;
+}
+
+/* The sliding panel */
+#toc-panel {
+    position: absolute;
+    top: 25vh;
+    left: 0;
+    width: 20vw;
+    height: fit-content;
+    background: #ffffff;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease;
+    transform: translateX(0);
+}
+
+/* Hidden state (off screen) */
+#toc-panel.hidden {
+    transform: translateX(-15vw);
+}
+
+/* The toggle arrow button */
+#toc-toggle {
+    align-items: center;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    height: fit-content;
+    justify-content: center;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    transition: background 0.3s;
+    width:5vw;
+}
+
+  #toc-toggle{
+    font-size: 1.5rem;
+  }
+
+.toc-entry:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* PAGE NAVIGATION */
+#tab-button-container {
+    display: flex;
+    justify-content: space-between;
+    min-width: 1000px;
+    width: 100%;
+}
+
+.tab-button {
+    background-color: white;
+    border-radius: 0;
+    flex: 1;
+    font-size: 1.5rem;
+    padding: 1rem;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.tab-button:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* FOOTER */
+footer {
+    align-items: center;
+    background-color: #01154f;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;
+    min-width: 1000px;
+    padding: 0.5rem 1rem;
+}
+
+/* Disclaimer */
+#footer-text { text-align: justify }
+footer p, footer a { font-size: 1.5rem }
+
+#footer-image-crop {
+    border-radius: 10px;
+    height: 75px;
+    overflow-y: hidden;
+    width: 187px;
+}
+
+#footer-image-crop img {
+    transform: translateY(-20%);
+    width: 100%;
+}
