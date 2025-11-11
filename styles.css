@@ -29,7 +29,7 @@ header {
         text-decoration: none;
     }
 
-    header a:hover, header h1 a:hover {
+    header a:hover, header h1 a:hover, footer a:hover {
         cursor: pointer;
         text-decoration: underline;
     }
@@ -70,7 +70,7 @@ body {
     text-align: left;
 }
 
-/* The sliding panel */
+/* TOC */
 #toc-panel {
     position: absolute;
     top: 25vh;
@@ -83,12 +83,12 @@ body {
     transform: translateX(0);
 }
 
-/* Hidden state (off screen) */
+/* Hidden TOC */
 #toc-panel.hidden {
     transform: translateX(-15vw);
 }
 
-/* The toggle arrow button */
+/* Toggle TOC Display */
 #toc-toggle {
     align-items: center;
     background-color: transparent;
@@ -120,7 +120,7 @@ body {
     width: 100%;
 }
 
-.tab-button {
+.tab-nav {
     background-color: white;
     border-radius: 0;
     flex: 1;
@@ -130,7 +130,7 @@ body {
     white-space: nowrap;
 }
 
-.tab-button:hover {
+.tab-nav:hover {
     cursor: pointer;
     text-decoration: underline;
 }

@@ -17,7 +17,9 @@
 
     <div id="main-content-wrapper">
         <div id="toc-panel">
+            <!-- Table of Contents -->
             <div id="toc">
+                <!-- Add new HTML page buttons here -->
                 <button id="introduction" class="toc-entry" onclick="changeTab(0)" style="font-weight: bold;">Introduction</button>
                 <button id="neoclassical" class="toc-entry" onclick="changeTab(1)">The Basic Neoclassical Growth Model</button>
                 <button id="nonneutralTFP" class="toc-entry" onclick="changeTab(2)">Modeling Non-Neutral TFP</button>
@@ -27,19 +29,20 @@
             <div id="toc-toggle">◀</div>
         </div>
         
-        <iframe id="notebook" src="introduction.html" frameborder="0"></iframe>
+        <!-- Lecture Notebook Contents -->
+        <iframe id="notebook" src="introduction.html" frameborder="0" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
     </div>
     
-
+    <!-- Next/Previous Tab Buttons -->
     <div id="tab-button-container">
-        <button id ="tabBack" class="tab-button" onclick="changeTab(tabIdx-1)" style="display: none;">◀ The Basic Neoclassical Growth Model</button>
-        <button id ="tabFwd" class="tab-button" onclick="changeTab(tabIdx+1)" style="display: block;">Extended Theory with Intangible Investment ▶</button>
+        <button id ="tabBack" class="tab-nav" onclick="changeTab(tabIdx-1)" style="display: none;">◀ The Basic Neoclassical Growth Model</button>
+        <button id ="tabFwd" class="tab-nav" onclick="changeTab(tabIdx+1)" style="display: block;">Extended Theory with Intangible Investment ▶</button>
     </div>
 
     <footer>
         <!-- Acknowledgements -->
         <div id="footer-text">
-            <p>This site was built in part using <a href="https://plutojl.org/" target = "_blank">Pluto.jl</a> and <a href="https://www.mathjax.org/" target = "_blank">MathJax</a>.</p>
+            <p>The lectures on this site were builty using <a href="https://plutojl.org/" target = "_blank">Pluto.jl</a>.</p>
         </div>
         <!-- HHEI logo -->
         <div id="footer-image">
@@ -52,56 +55,70 @@
     </footer>
 
     <script>
+        
 
+        /* TABLE OF CONTENTS */
+        
         const panel = document.getElementById('toc-panel');
         const arrow = document.getElementById('toc-toggle');
+        let isHidden = false; // Hide by default
 
-        let isHidden = false;
-
+        // Toggle functionality
         arrow.addEventListener('click', () => {
-            panel.classList.toggle('hidden');
+                panel.classList.toggle('hidden');
 
-            isHidden = !isHidden;
-            arrow.textContent = isHidden ? "▶" : "◀";
-        });
+                isHidden = !isHidden;
+                arrow.textContent = isHidden ? "▶" : "◀";
+            });
+        
 
-        // Tab Contents
+        /* TAB CONTENTS */
 
-        let introduction = {name: "introduction", title: "Introduction"}
+        const notebook = document.getElementById('notebook'); // Featured Pluto.jl file saved in HTML format
 
-        let intangible = {name: "intangible", title: "Extended Theory with Intangible Investment"}
+        /* Add new HTML page objects here
+            1. The object name and the "name" attribute should match the name of the HTML file
+            2. The "title" attribute will be displayed in the table of contents, and should match the plain-text title at the top of the HTML file
+            3.  Add the new HTML file to the tabContents array IN THE SAME LOCATION AS IN THE TABLE OF CONTENTS
+        */
+        const introduction = {name: "introduction", title: "Introduction"}
+        const intangible = {name: "intangible", title: "Extended Theory with Intangible Investment"}
+        const nonneutralTFP = {name: "nonneutralTFP", title: "Modeling Non-Neutral TFP"}
+        const evidenceIntangible = {name: "evidenceIntangible", title: "Evidence of Increased Intangible Investment"}
+        const neoclassical = {name: "neoclassical", title: "The Basic Neoclassical Growth Model"}
 
-        let nonneutralTFP = {name: "nonneutralTFP", title: "Modeling Non-Neutral TFP"}
+        let tabContents = [
+            introduction,
+            neoclassical,
+            nonneutralTFP,
+            evidenceIntangible,
+            intangible
+        ]
 
-        let evidenceIntangible = {name: "evidenceIntangible", title: "Evidence of Increased Intangible Investment"}
 
-        let neoclassical = {name: "neoclassical", title: "The Basic Neoclassical Growth Model"}
+        /* CHANGE TABS */
 
-        let tabContents = [introduction, neoclassical, nonneutralTFP, evidenceIntangible, intangible]
-
-        let tabIdx = 0
-
+        let tabIdx = 0 // Tracks index of current tab
         const numTabs = tabContents.length
-
         const tabBack = document.getElementById('tabBack');
         const tabFwd = document.getElementById('tabFwd');
-        const notebook = document.getElementById('notebook');
 
         function changeTab(newIdx) {
+            // Bold selected file in table of contents
             document.getElementById(tabContents[tabIdx].name).style.fontWeight = "normal";
             document.getElementById(tabContents[newIdx].name).style.fontWeight = "bold";
+
+            // Update navigation arrows at bottom of page
             if (newIdx === 0) {
-               tabBack.style.display = "none";
-            }
-            if (newIdx === numTabs - 1) {
-                tabFwd.style.display = "none";
-            }
-            if (tabIdx === 0 && newIdx !== 0) {
+                tabBack.style.display = "none";
+            } else if (newIdx === numTabs - 1) {
+                tabFwd.style.display = "none";  
+            } else {
                 tabBack.style.display = "block";
-            }
-            if (tabIdx === (numTabs - 1) && newIdx !== tabIdx) {
                 tabFwd.style.display = "block";
             }
+
+            // Update tab index, displayed HTML file, and navigation arrows
             tabIdx = newIdx
             notebook.src = tabContents[tabIdx].name + ".html";
             if (tabIdx > 0) {tabBack.innerHTML = "◀ " + tabContents[tabIdx-1].title;}
@@ -109,7 +126,7 @@
             
         }
 
-
+        // Change tab when arrow keys clicked
         document.addEventListener("keydown", function(event) {
             if (event.key === "ArrowLeft" && tabIdx > 0) {
                 changeTab(tabIdx - 1)
@@ -118,7 +135,6 @@
                 changeTab(tabIdx + 1)
             }
         });
-
         
     </script>
 
