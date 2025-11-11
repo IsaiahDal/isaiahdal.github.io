@@ -4,7 +4,7 @@
 
 Install [Julia](https://julialang.org/), [Pluto.jl](https://plutojl.org/), and [VSCode](https://code.visualstudio.com/) (or another code editor with support for HTML/CSS/JS and Julia).
 
-## Adding Pages
+## Editing/Adding Pages
 
 If updating an existing page, only step 1 is required. If adding a new page to the site, follow all steps below.
 
