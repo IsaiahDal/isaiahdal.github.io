@@ -6,5 +6,15 @@ Install [Julia](https://julialang.org/), [Pluto.jl](https://plutojl.org/), and [
 
 ## Adding Pages
 
-## Files
+### 1. Export Pluto.jl Notebook to HTML
+
+Click the export button at the top right of the Pluto.jl notebook (see below). Select **Static HTML**, then **Download HTML File**. Note that the downloaded HTML file will have the same name as the corresponding .jl file.
+
 ![Export](images/exportbutton.png)
+
+### 2. 
+
+
+
+## Files
+
