@@ -7,4 +7,4 @@ Install [Julia](https://julialang.org/), [Pluto.jl](https://plutojl.org/), and [
 ## Adding Pages
 
 ## Files
-U+1F4E4
+![Export](images/exportbutton.png)
