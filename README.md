@@ -12,7 +12,7 @@ If updating an existing page, only step 1 is required. If adding a new page to t
 
 > Make sure that all code (including Markdown) that you do not wish to display is hidden before exporting by clicking the _Show/hide code_ (👁) button located near the top left of each code cell.
 
-Click the export button located at the top right of the Pluto.jl notebook (see below). Select **Static HTML**, then **Download HTML File**. Note that the downloaded HTML file will have the same name as the corresponding .jl file.
+Click the export button located at the top right of the Pluto.jl notebook (see below). Select **Static HTML**, then **Download HTML File**. Note that the downloaded HTML file will have the same name as the corresponding .jl file. Once exported, upload the HTML file to the repository.
 
 ![Export](images/exportbutton.jpg)
 
@@ -39,6 +39,8 @@ const example = {name: "example", title: "This is an example title"}
 ```
 
 Then, add this object to the _tabContents_ array **in the same location as it appears in the table of contents.**
+
+Once finished, upload the updated index.html to the repository.
 
 ## Files
 
