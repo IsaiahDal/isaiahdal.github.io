@@ -6,6 +6,8 @@ Install [Julia](https://julialang.org/), [Pluto.jl](https://plutojl.org/), and [
 
 ## Editing/Adding Pages
 
+For a short guide to editing and creating Pluto notebooks, see [https://isaiahdal.github.io/](https://isaiahdal.github.io/). 
+
 If updating an existing page, only step 1 is required. If adding a new page to the site, follow all steps below. Additionally, see [style.md](https://github.com/IsaiahDal/isaiahdal.github.io/blob/main/style.md) for some basic coding standards.
 
 ### 1. Export Pluto.jl Notebook to HTML
@@ -42,6 +44,10 @@ Then, add this object to the _tabContents_ array **in the same location as it ap
 
 Once finished, upload the updated index.html to the repository.
 
+### 3. Upload Data
+
+Upload any _new_ data files to the "DATA" subdirectory.
+
 ## Files
 
 ### index.html
@@ -52,6 +58,6 @@ The main HTML page. Used to display and navigate between the HTML files created 
 
 CSS styles for index.html.
 
-### Other HTML files
+### Other files
 
 TODO
