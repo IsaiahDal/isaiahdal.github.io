@@ -22,13 +22,13 @@ The following example assumes that the file you wish to add is named _example.ht
 
 #### a. Update HTML
 
-Find the toc div, which can be done by using `Ctrl (or Cmd) + F` and entering _Add new HTML page buttons here_. Add a button for the new HTML file in the location that you wish it to appear in the table of contents. For example, if you wish to list the file 3rd in the table of contents:
+Open index.html in your code editor. Find the toc div, which can be done by using `Ctrl (or Cmd) + F` and entering _Add new HTML page buttons here_. Add a button for the new HTML file **in the location that you wish it to appear in the table of contents**. For example, if you wish to list the file 3rd in the table of contents:
 
 ```
 <button id="example" class="toc-entry" onclick="changeTab(2)">This is an example title</button>
 ```
 
-> **Note:** The number used in the call to _changeTab_ should be one less than the file's location in the table of contents. Additionally, make sure you update the calls to _changeTab_ for all buttons appearing after the new button accordingly.
+> **Note:** The number used in the call to _changeTab_ should be one less than the file's location in the table of contents, as JavaScript uses zero-based numbering. Additionally, make sure you update the calls to _changeTab_ for all buttons appearing after the new button accordingly.
 
 #### b. Update JavaScript
 
