@@ -6,6 +6,8 @@ Install [Julia](https://julialang.org/), [Pluto.jl](https://plutojl.org/), and [
 
 ## Adding Pages
 
+If updating an existing page, only step 1 is required. If adding a new page to the site, follow all steps below.
+
 ### 1. Export Pluto.jl Notebook to HTML
 
 > Make sure that all code (including Markdown) that you do not wish to display is hidden before exporting by clicking the _Show/hide code_ (👁) button located near the top left of each code cell.
@@ -13,8 +15,6 @@ Install [Julia](https://julialang.org/), [Pluto.jl](https://plutojl.org/), and [
 Click the export button located at the top right of the Pluto.jl notebook (see below). Select **Static HTML**, then **Download HTML File**. Note that the downloaded HTML file will have the same name as the corresponding .jl file.
 
 ![Export](images/exportbutton.jpg)
-
-
 
 ### 2. Update index.html
 
