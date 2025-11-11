@@ -12,8 +12,8 @@ begin
 	HTML("""
 	<style>
 	  main {
-	    max-width: 60vw !important;
-	    margin-right: 22vw !important;
+	    max-width: 58vw !important;
+	    margin-right: 25vw !important;
 	  }
 	</style>
 	""")
