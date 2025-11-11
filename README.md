@@ -6,7 +6,7 @@ Install [Julia](https://julialang.org/), [Pluto.jl](https://plutojl.org/), and [
 
 ## Editing/Adding Pages
 
-If updating an existing page, only step 1 is required. If adding a new page to the site, follow all steps below.
+If updating an existing page, only step 1 is required. If adding a new page to the site, follow all steps below. Additionally, see style.md for some basic coding standards.
 
 ### 1. Export Pluto.jl Notebook to HTML
 
