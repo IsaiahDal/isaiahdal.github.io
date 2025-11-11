@@ -10,7 +10,7 @@ Install [Julia](https://julialang.org/), [Pluto.jl](https://plutojl.org/), and [
 
 Click the export button at the top right of the Pluto.jl notebook (see below). Select **Static HTML**, then **Download HTML File**. Note that the downloaded HTML file will have the same name as the corresponding .jl file.
 
-![Export](images/exportbutton.png)
+![Export](images/exportbutton.jpg)
 
 ### 2. 
 
