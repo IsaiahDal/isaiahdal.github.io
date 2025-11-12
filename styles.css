@@ -151,7 +151,7 @@ body {
 
 #github-link {
     width: auto;
-    height: 5vh;
+    height: 8vh;
     object-fit: cover;
     border-radius: 50%;
     transition: 0.3s ease;
@@ -165,4 +165,39 @@ body {
 
 #github-link:hover {
     transform: scale(1.5);
+}
+
+.hamburger {
+  width: min(8vh, 5vw);
+  height: min(8vh, 5vw);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 1000;
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  width: min(8vh, 5vw);
+  margin: 1vh 0 1vh 0;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(3.25vh)
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-3.25vh)
 }

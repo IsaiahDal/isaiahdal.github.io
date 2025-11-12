@@ -13,7 +13,11 @@
     <header>
         <!-- Title & Author -->
         <div id="header-left">
-            <div id="toc-toggle">≡</div>
+            <div id="toc-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <!-- Link to GitHub Repository -->
             <a href="https://github.com/IsaiahDal/isaiahdal.github.io" target="_blank">
                 <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="GitHub Link" id="github-link">
@@ -73,7 +77,7 @@
 
                 isHidden = !isHidden;
                 
-                arrow.textContent = isHidden ? "≡" : "X";
+                arrow.classList.toggle('active');
             });
         
 
