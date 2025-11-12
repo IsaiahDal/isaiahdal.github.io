@@ -14,7 +14,7 @@ If updating an existing page, only step 1 is required. If adding a new page to t
 
 > Make sure that all code (including Markdown) that you do not wish to display is hidden before exporting by clicking the _Show/hide code_ (👁) button located near the top left of each code cell.
 
-Click the export button located at the top right of the Pluto.jl notebook (see below). Select **Static HTML**, then **Download HTML File**. Note that the downloaded HTML file will have the same name as the corresponding .jl file. Once exported, upload the HTML file to the repository.
+Click the export button located at the top right of the Pluto.jl notebook (see below). Select **Static HTML**, then **Download HTML File**. Note that the downloaded HTML file will have the same name as the corresponding .jl file. Once exported, upload the HTML file to the notebook subdirectory of this repository.
 
 ![Export](images/exportbutton.jpg)
 
@@ -42,6 +42,6 @@ The main HTML page. Used to display and navigate between the HTML files created 
 
 CSS styles for index.html.
 
-### Other files
+### notebooks
 
-TODO
+All Pluto.jl notebooks, rendered to static HTML.
