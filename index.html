@@ -9,29 +9,47 @@
     <link rel="stylesheet" href="styles.css"> <!-- Layout -->
 </head>
 <body>
-    <!-- Title & Author -->
+    
     <header>
-        <h1><a href="https://www.aeaweb.org/articles?id=10.1257/mac.2.4.88" target = "_blank">Measuring Business Productivity and Value</a></h1>
-        <p><a href="http://users.econ.umn.edu/~erm/" target = "_blank">Ellen McGrattan</a></p>
-    </header>
-
-    <div id="main-content-wrapper">
-        <div id="toc-panel">
-            <!-- Table of Contents -->
-            <div id="toc">
-                <!-- Add new HTML page buttons here -->
-                <button id="introduction" class="toc-entry" onclick="changeTab(0)" style="font-weight: bold;">Introduction</button>
-                <button id="neoclassical" class="toc-entry" onclick="changeTab(1)">The Basic Neoclassical Growth Model</button>
-                <button id="nonneutralTFP" class="toc-entry" onclick="changeTab(2)">Modeling Non-Neutral TFP</button>
-                <button id="evidenceIntangible" class="toc-entry" onclick="changeTab(3)">Evidence of Increased Intangible Investment</button>
-                <button id="intangible" class="toc-entry" onclick="changeTab(4)">Extended Theory With Intangible Investment</button>
-            </div>
-            <div id="toc-toggle">◀</div>
+        <!-- Title & Author -->
+        <div id="header-left">
+            <div id="toc-toggle">≡</div>
+            <!-- Link to GitHub Repository -->
+            <a href="https://github.com/IsaiahDal/isaiahdal.github.io" target="_blank">
+                <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="GitHub Link" id="github-link">
+            </a>
+            <h1><a href="https://www.aeaweb.org/articles?id=10.1257/mac.2.4.88" target = "_blank">Measuring Business Productivity and Value</a>
+                <br>
+                <a href="http://users.econ.umn.edu/~erm/" target = "_blank" style="font-size: 1.5rem; color: seashell;">Ellen McGrattan</a>
+            </h1>
         </div>
         
-        <!-- Lecture Notebook Contents -->
-        <iframe id="notebook" src="introduction.html" frameborder="0"></iframe>
+        
+        <!-- Links -->
+        <div id="header-right">
+            <!-- HHEI logo -->
+             <p style="font-size: 0.6em; text-align: center;">Brought to you by the team at:</p>
+            <div id="hhei-image">
+                <a href="https://cla.umn.edu/heller-hurwicz" target="_blank">
+                    <img src="https://cla.umn.edu/sites/cla.umn.edu/files/HHEI%20wordmark.png" alt="Heller-Hurwicz Economics Institute" id="HHEI-Logo">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Table of Contents -->
+    <div id="toc" class="hidden">
+        <h2>Contents</h2>
+        <!-- Add new HTML page buttons here -->
+        <button id="introduction" class="toc-entry" style="font-weight: bold;">Introduction</button>
+        <button id="neoclassical" class="toc-entry">The Basic Neoclassical Growth Model</button>
+        <button id="nonneutralTFP" class="toc-entry">Modeling Non-Neutral TFP</button>
+        <button id="evidenceIntangible" class="toc-entry">Evidence of Increased Intangible Investment</button>
+        <button id="intangible" class="toc-entry">Extended Theory With Intangible Investment</button>
     </div>
+
+    <!-- Lecture Notebook Contents -->
+    <iframe id="notebook" src="introduction.html" frameborder="0"></iframe>
     
     <!-- Next/Previous Tab Buttons -->
     <div id="tab-button-container">
@@ -39,34 +57,23 @@
         <button id ="tabFwd" class="tab-nav" onclick="changeTab(tabIdx+1)" style="display: block;">Extended Theory with Intangible Investment ▶</button>
     </div>
 
-    <footer>
-        <!-- Link to GitHub Repository -->
-        <a href="https://github.com/IsaiahDal/isaiahdal.github.io" target="_blank">
-            <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="GitHub Link" id="github-link">
-        </a>
-        <!-- HHEI logo -->
-        <div id="footer-image">
-            <a href="https://cla.umn.edu/heller-hurwicz" target="_blank">
-                <img src="https://cla.umn.edu/sites/cla.umn.edu/files/HHEI%20wordmark.png" alt="Heller-Hurwicz Economics Institute" id="HHEI-Logo">
-            </a>
-        </div>
-    </footer>
-
     <script>
         
 
         /* TABLE OF CONTENTS */
         
-        const panel = document.getElementById('toc-panel');
+        const toc = document.getElementById('toc');
         const arrow = document.getElementById('toc-toggle');
-        let isHidden = false; // Hide by default
+        let isHidden = true; // Hide by default
 
         // Toggle functionality
         arrow.addEventListener('click', () => {
-                panel.classList.toggle('hidden');
+                toc.classList.toggle('hidden');
+                notebook.classList.toggle('blurred');
 
                 isHidden = !isHidden;
-                arrow.textContent = isHidden ? "▶" : "◀";
+                
+                arrow.textContent = isHidden ? "≡" : "X";
             });
         
 
@@ -74,24 +81,19 @@
 
         const notebook = document.getElementById('notebook'); // Featured Pluto.jl file saved in HTML format
 
-        /* Add new HTML page objects here
-            1. The object name and the "name" attribute should match the name of the HTML file
-            2. The "title" attribute will be displayed in the table of contents, and should match the plain-text title at the top of the HTML file
-            3.  Add the new HTML file to the tabContents array IN THE SAME LOCATION AS IN THE TABLE OF CONTENTS
-        */
-        const introduction = {name: "introduction", title: "Introduction"}
-        const intangible = {name: "intangible", title: "Extended Theory with Intangible Investment"}
-        const nonneutralTFP = {name: "nonneutralTFP", title: "Modeling Non-Neutral TFP"}
-        const evidenceIntangible = {name: "evidenceIntangible", title: "Evidence of Increased Intangible Investment"}
-        const neoclassical = {name: "neoclassical", title: "The Basic Neoclassical Growth Model"}
+        const tocEntries = document.querySelectorAll('#toc .toc-entry');
 
-        let tabContents = [
-            introduction,
-            neoclassical,
-            nonneutralTFP,
-            evidenceIntangible,
-            intangible
-        ]
+        const tabContents = Array.from(tocEntries).map(item => ({
+            name: item.id,
+            title: item.textContent
+        }));
+
+        tocEntries.forEach((item, index) => {
+            item.textContent = `${index + 1}. ${item.textContent}`
+            item.addEventListener('click', () => {
+                changeTab(index);
+            });
+        });
 
 
         /* CHANGE TABS */

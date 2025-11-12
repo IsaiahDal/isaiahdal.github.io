@@ -6,21 +6,34 @@
 
 /* HEADER */
 header {
+    align-items: center;
     background-color: #01154f;
     color: white; 
-    height: 15vh;
+    display: flex;
+    height: 13vh;
+    justify-content: space-between;
     margin: 0px;
     min-width: 1000px;
-    padding: 15px;
-    text-align: center;
+    text-align: left;
 }
 
+    #header-left {
+        align-items: center;
+        display: flex;
+    }
+
     /* Title */
+
+    header h1 { 
+        padding-left: 2vw;
+    }
     header h1 a { 
         color: white;
-        font-size: 2.5rem;
+        font-size: 2rem;
         text-decoration: none;
     }
+
+
 
     /* Author */
     header a, footer a { 
@@ -33,59 +46,51 @@ header {
         cursor: pointer;
         text-decoration: underline;
     }
+    
+    #hhei-image {
+        padding: 0 1vw 0 1vw;
+    }
 
 body { 
     margin: 0px 
 }
 
 /* NOTEBOOK PAGES */
-#main-content-wrapper { 
-    display: flex;
-    gap: 20px;
+#notebook { 
     height: 80vh;
+    min-width: 1000px;
+    transition: 0.3s ease;
+    width: 100%;
 }
 
-#notebook {
-    width: 100%;
-    height: 80vh;
+#notebook.blurred {
+    filter: blur(1px);
 }
 
 #toc {
     background-color: rgb(235, 235, 235);
-    border-radius: 0.5vw;
     box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-    height: fit-content;
-    left: 1vw;
+    height: 87vh;
+    left: 0;
     position: absolute;
-    top: 0;
-    width: 15vw;
+    top: 13vh;
+    transition: 0.3s ease;
+    width: 20vw;
     z-index: 3;
+}
+#toc.hidden {
+    transform: translateX(-20vw);
 }
 .toc-entry {
     background-color: transparent;
     border: none;
-    font-size: 0.7rem;
     padding-bottom: 1vh;
     padding-top: 1vh;
     text-align: left;
 }
-
-/* TOC */
-#toc-panel {
-    position: absolute;
-    top: 25vh;
-    left: 0;
-    width: 20vw;
-    height: fit-content;
-    background: #ffffff;
-    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.4s ease;
-    transform: translateX(0);
-}
-
-/* Hidden TOC */
-#toc-panel.hidden {
-    transform: translateX(-15vw);
+#toc h2 {
+    font-size: 1.5rem;
+    text-align: center;
 }
 
 /* Toggle TOC Display */
@@ -94,17 +99,16 @@ body {
     background-color: transparent;
     cursor: pointer;
     display: flex;
+    font-size: 2.5rem;
     height: fit-content;
     justify-content: center;
-    position: absolute;
-    right: 0px;
     top: 0px;
-    transition: background 0.3s;
-    width:5vw;
+    transition: 0.3s ease;
+    width: 5vw;
 }
 
-  #toc-toggle{
-    font-size: 1.5rem;
+  #toc-toggle:hover {
+    font-size: 4rem;
   }
 
 .toc-entry:hover {
@@ -114,18 +118,19 @@ body {
 
 /* PAGE NAVIGATION */
 #tab-button-container {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
     display: flex;
     justify-content: space-between;
     min-width: 1000px;
+    height: 6vh;
     width: 100%;
 }
 
 .tab-nav {
-    background-color: white;
-    border-radius: 0;
+    background-color: rgb(235, 235, 235);
+    border: 1px;
     flex: 1;
     font-size: 1.5rem;
-    padding: 1rem;
     text-align: center;
     white-space: nowrap;
 }
@@ -135,33 +140,18 @@ body {
     text-decoration: underline;
 }
 
-/* FOOTER */
-footer {
-    align-items: center;
-    background-color: #01154f;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    margin: 0px;
-    min-width: 1000px;
-    padding: 0.5rem 1rem;
-}
-
-/* Disclaimer */
-#footer-text { text-align: justify }
-footer p, footer a { font-size: 1.5rem }
 
 #HHEI-Logo {
-    width: 10vw;
-    height: 8vh;
+    width: 9vw;
+    height: 7vh;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 1%;
     transition: 0.3s ease;
 }
 
 #github-link {
     width: auto;
-    height: 8vh;
+    height: 5vh;
     object-fit: cover;
     border-radius: 50%;
     transition: 0.3s ease;
@@ -169,6 +159,10 @@ footer p, footer a { font-size: 1.5rem }
 
 
 
-#HHEI-Logo:hover, #github-link:hover {
-    transform: scale(1.1);
+#HHEI-Logo:hover {
+    transform: scale(1.2);
+}
+
+#github-link:hover {
+    transform: scale(1.5);
 }
