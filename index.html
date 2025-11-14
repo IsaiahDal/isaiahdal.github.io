@@ -17,7 +17,7 @@
         <div id="header-left">
 
             <!-- Table of Contents Toggle Button-->
-            <div id="toc-toggle">☰</div>
+            <button id="toc-toggle" onclick="toggleTOC()">☰</button>
 
             <!-- Link to GitHub Repository -->
             <a href="https://github.com/IsaiahDal/isaiahdal.github.io" target="_blank">
@@ -45,11 +45,11 @@
     <div id="toc" class="hidden">
         <h2>Contents</h2>
         <!-- Add new HTML page buttons here -->
-        <button id="introduction" class="toc-entry" style="font-weight: bold;">Introduction</button>
-        <button id="neoclassical" class="toc-entry">The Basic Neoclassical Growth Model</button>
-        <button id="nonneutralTFP" class="toc-entry">Modeling Non-Neutral TFP</button>
-        <button id="evidenceIntangible" class="toc-entry">Evidence of Increased Intangible Investment</button>
-        <button id="intangible" class="toc-entry">Extended Theory With Intangible Investment</button>
+        <button id="introduction" class="toc-entry" style="font-weight: bold;"><p>Introduction</p></button>
+        <button id="neoclassical" class="toc-entry"><p>The Basic Neoclassical Growth Model</p></button>
+        <button id="nonneutralTFP" class="toc-entry"><p>Modeling Non-Neutral TFP</p></button>
+        <button id="evidenceIntangible" class="toc-entry"><p>Evidence of Increased Intangible Investment</p></button>
+        <button id="intangible" class="toc-entry"><p>Extended Theory With Intangible Investment</p></button>
     </div>
 
     <!-- Lecture Notebook Contents -->
@@ -81,9 +81,10 @@
 
         // Number TOC and change to clicked tab
         tocEntries.forEach((item, index) => {
-            item.textContent = `${index + 1}. ${item.textContent}`
+            item.querySelector('p').textContent = `${index + 1}. ${item.textContent}`
             item.addEventListener('click', () => {
                 changeTab(index);
+                toggleTOC(); // Close TOC after tab selected
             });
         });
 
@@ -95,8 +96,7 @@
         let isHidden = true;
 
         // Toggle functionality
-        tocToggle.addEventListener('click', () => {
-
+        function toggleTOC() {
             // Show TOC, hide previous/next buttons, and blur tab contents when TOC open
             toc.classList.toggle('hidden');
             document.getElementById('tab-button-container').classList.toggle('hidden');
@@ -106,7 +106,7 @@
 
             // Update toggle button appearance
             tocToggle.textContent = isHidden ? "☰" : "X";
-        });
+        }
         
 
 

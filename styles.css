@@ -31,6 +31,8 @@ header {
 #toc-toggle {
     align-items: center;
     background-color: transparent;
+    border: none;
+    color: white;
     display: flex;
     font-size: 2rem;
     height: 6vh;
@@ -45,7 +47,7 @@ header {
 /* GitHub Repository Link */
 #github-link {
     border-radius: 50%;
-    height: 4vh;
+    height: 5vh;
     object-fit: cover;
     width: auto;
 }
@@ -55,9 +57,15 @@ header {
 /* Title & Author */
 
 header h1 { padding-left: 2vw; }
-header h1 a { 
+header h1 a {
     color: white;
     font-size: 1.6rem;
+}
+.toc-entry p {
+    color: black;
+    margin-top: 0.5vh;
+}
+header h1 a, .toc-entry p { 
     position: relative;
     text-decoration: none;
 }
@@ -67,9 +75,8 @@ header h1 a {
 }
 
 /* Underline animation */
-header h1 a::after {
-    background: white;
-    bottom: -2px;
+header h1 a::after, .toc-entry p::after {
+    bottom: 0px;
     content: '';
     height: 2px;
     left: 0;
@@ -79,7 +86,9 @@ header h1 a::after {
     transition: transform 0.5s ease;
     width: 100%;
 }
-header h1 a:hover::after { transform: scaleX(1); }
+header h1 a::after { background: white; }
+.toc-entry p::after { background: black; }
+header h1 a:hover::after, .toc-entry p:hover::after { transform: scaleX(1); }
 
 /* HHEI Link */
 #hhei-image { padding: 0 1vw 0 1vw; }
@@ -98,21 +107,24 @@ header h1 a:hover::after { transform: scaleX(1); }
 #toc {
     background-color: rgb(235, 235, 235);
     box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
     height: 90vh;
     left: 0;
+    overflow-y: auto;
     position: absolute;
     top: 10vh;
-    width: 25vw;
+    width: 30vw;
     z-index: 3;
 }
-#toc.hidden { transform: translateX(-25vw); }
+#toc.hidden { transform: translateX(-30vw); }
 
 /* TOC Entries */
 .toc-entry {
     background-color: transparent;
     border: none;
-    padding: 1vh 1vw 1vh 1vw;
     text-align: left;
+    width: fit-content;
 }
 #toc h2 {
     font-size: 1.5rem;
@@ -165,5 +177,5 @@ body {
 }
 .tab-nav:hover {
     cursor: pointer;
-    font-size: 1.7rem;
+    font-size: 1.6rem;
 }
