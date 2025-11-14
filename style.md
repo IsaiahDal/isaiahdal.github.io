@@ -29,6 +29,19 @@ begin
 end
 ```
 
+If you include any links to external pages within a notebook, include the following in a hidden cell at the bottom of a notebook. This will ensure that the links are opened in a new tab, instead of within the notebook's iframe on the current page.
+
+```
+html"""
+<script>
+document.querySelectorAll('a[href]').forEach(a => {
+    a.setAttribute('target', '_blank');
+    a.setAttribute('rel', 'noopener noreferrer');
+});
+</script>
+"""
+```
+
 ## Coding Style
 
 See the [Julia Style Guide](https://docs.julialang.org/en/v1/manual/style-guide/) for the baseline guidelines.
