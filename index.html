@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Measuring Business Productivity and Value</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"> <!-- For Montserrat font-family-->
-    <link rel="stylesheet" href="styles.css"> <!-- Layout -->
+    <link rel="stylesheet" href="styles.css"> <!-- Page Layout -->
 </head>
+
 <body>
-    
+
+    <!-- Top Ribbon -->
     <header>
-        <!-- Title & Author -->
         <div id="header-left">
-            <div id="toc-toggle" class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+
+            <!-- Table of Contents Toggle Button-->
+            <div id="toc-toggle">☰</div>
+
             <!-- Link to GitHub Repository -->
             <a href="https://github.com/IsaiahDal/isaiahdal.github.io" target="_blank">
                 <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="GitHub Link" id="github-link">
             </a>
+
+            <!-- Title and Author -->
             <h1><a href="https://www.aeaweb.org/articles?id=10.1257/mac.2.4.88" target = "_blank">Measuring Business Productivity and Value</a>
                 <br>
-                <a href="http://users.econ.umn.edu/~erm/" target = "_blank" style="font-size: 1.5rem; color: seashell;">Ellen McGrattan</a>
+                <a href="http://users.econ.umn.edu/~erm/" target = "_blank" class="author">Ellen McGrattan</a>
             </h1>
+
         </div>
-        
-        
-        <!-- Links -->
-        <div id="header-right">
-            <!-- HHEI logo -->
-             <p style="font-size: 0.6em; text-align: center;">Brought to you by the team at:</p>
-            <div id="hhei-image">
-                <a href="https://cla.umn.edu/heller-hurwicz" target="_blank">
-                    <img src="https://cla.umn.edu/sites/cla.umn.edu/files/HHEI%20wordmark.png" alt="Heller-Hurwicz Economics Institute" id="HHEI-Logo">
-                </a>
-            </div>
+
+        <!-- Link to HHEI -->
+        <div id="hhei-image">
+            <a href="https://cla.umn.edu/heller-hurwicz" target="_blank">
+                <img src="https://cla.umn.edu/sites/cla.umn.edu/files/HHEI%20wordmark.png" alt="Heller-Hurwicz Economics Institute" id="HHEI-Logo">
+            </a>
         </div>
+
     </header>
 
     <!-- Table of Contents -->
@@ -61,37 +61,25 @@
         <button id ="tabFwd" class="tab-nav" onclick="changeTab(tabIdx+1)" style="display: block;">Extended Theory with Intangible Investment ▶</button>
     </div>
 
+
     <script>
         
-
-        /* TABLE OF CONTENTS */
+        /*            TABLE OF CONTENTS           */
         
+
+        /* CONSTRUCT TABLE OF CONTENTS */
+
+        // Query all TOC buttons
         const toc = document.getElementById('toc');
-        const arrow = document.getElementById('toc-toggle');
-        let isHidden = true; // Hide by default
+        const tocEntries = toc.querySelectorAll('.toc-entry');
 
-        // Toggle functionality
-        arrow.addEventListener('click', () => {
-                toc.classList.toggle('hidden');
-                notebook.classList.toggle('blurred');
-
-                isHidden = !isHidden;
-                
-                arrow.classList.toggle('active');
-            });
-        
-
-        /* TAB CONTENTS */
-
-        const notebook = document.getElementById('notebook'); // Featured Pluto.jl file saved in HTML format
-
-        const tocEntries = document.querySelectorAll('#toc .toc-entry');
-
+        // Add file names and titles to array
         const tabContents = Array.from(tocEntries).map(item => ({
             name: item.id,
             title: item.textContent
         }));
 
+        // Number TOC and change to clicked tab
         tocEntries.forEach((item, index) => {
             item.textContent = `${index + 1}. ${item.textContent}`
             item.addEventListener('click', () => {
@@ -100,19 +88,50 @@
         });
 
 
-        /* CHANGE TABS */
+
+        /* TOGGLE TABLE OF CONTENTS */
+
+        const tocToggle = document.getElementById('toc-toggle');
+        let isHidden = true;
+
+        // Toggle functionality
+        tocToggle.addEventListener('click', () => {
+
+            // Show TOC, hide previous/next buttons, and blur tab contents when TOC open
+            toc.classList.toggle('hidden');
+            document.getElementById('tab-button-container').classList.toggle('hidden');
+            notebook.classList.toggle('blurred');
+
+            isHidden = !isHidden;
+
+            // Update toggle button appearance
+            tocToggle.textContent = isHidden ? "☰" : "X";
+        });
+        
+
+
+
+        /*          TAB CONTENTS          */
+
+
+        const notebook = document.getElementById('notebook'); // Featured Pluto.jl file saved in HTML format
+
+
+        /* TAB NAVIGATION */
 
         let tabIdx = 0 // Tracks index of current tab
         const numTabs = tabContents.length
-        const tabBack = document.getElementById('tabBack');
-        const tabFwd = document.getElementById('tabFwd');
+        const tabBack = document.getElementById('tabBack'); // "Previous tab" button
+        const tabFwd = document.getElementById('tabFwd'); // "Next tab" button
 
+        // Tab change functionality
         function changeTab(newIdx) {
-            // Bold selected file in table of contents
+
+            // Bold selected tab in TOC
             document.getElementById(tabContents[tabIdx].name).style.fontWeight = "normal";
             document.getElementById(tabContents[newIdx].name).style.fontWeight = "bold";
 
-            // Update navigation arrows at bottom of page
+            // Update navigation buttons at bottom of page
             if (newIdx === 0) {
                 tabBack.style.display = "none";
             } else if (newIdx === numTabs - 1) {
@@ -122,11 +141,11 @@
                 tabFwd.style.display = "block";
             }
 
-            // Update tab index, displayed HTML file, and navigation arrows
+            // Update tab index, displayed HTML file, and navigation buttons
             tabIdx = newIdx
             notebook.src = "notebooks/" + tabContents[tabIdx].name + ".html";
-            if (tabIdx > 0) {tabBack.innerHTML = "◀ " + tabContents[tabIdx-1].title;}
-            if (tabIdx < numTabs - 1) {tabFwd.innerHTML = tabContents[tabIdx+1].title + " ▶";}
+            if (tabIdx > 0) { tabBack.innerHTML = "◀ " + tabContents[tabIdx-1].title; }
+            if (tabIdx < numTabs - 1) { tabFwd.innerHTML = tabContents[tabIdx+1].title + " ▶"; }
             
         }
 
@@ -141,7 +160,5 @@
         });
         
     </script>
-
 </body>
-
 </html>
