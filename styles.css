@@ -143,6 +143,25 @@ body {
     overflow-y: hidden;
 }
 
+#data-download {
+    background-color: rgb(59, 105, 255);
+    border: none;
+    border-radius: 1vw;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    color: white;
+    font-size: 1.5rem;
+    left: 1vw;
+    padding: min(1vw, 2vh);
+    position: absolute;
+    top: 15vh;
+    width: 15vw;
+    z-index: 2;
+}
+#data-download:hover { 
+    cursor: pointer;
+    transform: scale(1.1); 
+}
+
 /* Pluto Notebook */
 #notebook { 
     height: 83vh;
