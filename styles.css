@@ -1,0 +1,181 @@
+/* Universal Styles */
+* {  
+    font-family: 'Montserrat', sans-serif;
+    font-size: max(1vw, 10px);
+    transition: 0.3s ease;
+} 
+
+
+/* TOP RIBBON */
+
+/* Background */
+header {
+    align-items: center;
+    background-color: #01154f;
+    color: white; 
+    display: flex;
+    height: 10vh;
+    justify-content: space-between;
+    margin: 0px;
+    min-width: 1000px;
+    text-align: left;
+}
+
+/* Left Side */
+#header-left {
+    align-items: center;
+    display: flex;
+}
+
+/* Toggle TOC Display */
+#toc-toggle {
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    color: white;
+    display: flex;
+    font-size: 2rem;
+    height: 6vh;
+    justify-content: center;
+    width: 5vw;
+}
+#toc-toggle:hover {
+    cursor: pointer;
+    font-size: 2.5rem;
+}
+
+/* GitHub Repository Link */
+#github-link {
+    border-radius: 50%;
+    height: 5vh;
+    object-fit: cover;
+    width: auto;
+}
+#github-link:hover { transform: scale(1.2); }
+
+
+/* Title & Author */
+
+header h1 { padding-left: 2vw; }
+header h1 a {
+    color: white;
+    font-size: 1.6rem;
+}
+.toc-entry p {
+    color: black;
+    margin-top: 0.5vh;
+}
+header h1 a, .toc-entry p { 
+    position: relative;
+    text-decoration: none;
+}
+.author {
+    color: rgb(235, 235, 235);
+    font-size: 1.2rem;
+}
+
+/* Underline animation */
+header h1 a::after, .toc-entry p::after {
+    bottom: 0px;
+    content: '';
+    height: 2px;
+    left: 0;
+    position: absolute;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s ease;
+    width: 100%;
+}
+header h1 a::after { background: white; }
+.toc-entry p::after { background: black; }
+header h1 a:hover::after, .toc-entry p:hover::after { transform: scaleX(1); }
+
+/* HHEI Link */
+#hhei-image { padding: 0 1vw 0 1vw; }
+#HHEI-Logo {
+    border-radius: 1%;
+    height: 7vh;
+    object-fit: cover;
+    object-position: center 33%;
+    width: 15vw;
+}
+#HHEI-Logo:hover {transform: scale(1.1);}
+
+
+
+/* TABLE OF CONTENTS */
+#toc {
+    background-color: rgb(235, 235, 235);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    left: 0;
+    overflow-y: auto;
+    position: absolute;
+    top: 10vh;
+    width: 30vw;
+    z-index: 3;
+}
+#toc.hidden { transform: translateX(-30vw); }
+
+/* TOC Entries */
+.toc-entry {
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    width: fit-content;
+}
+#toc h2 {
+    font-size: 1.5rem;
+    text-align: center;
+}
+.toc-entry:hover {
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+
+
+/* MAIN CONTENT */
+body { 
+    margin: 0px;
+    overflow-y: hidden;
+}
+
+/* Pluto Notebook */
+#notebook { 
+    height: 83vh;
+    min-width: 1000px;
+    width: 100%;
+}
+#notebook.blurred {
+    filter: blur(1px);
+    height: 90vh;
+}
+
+
+
+/* PREVIOUS/NEXT TAB BUTTONS */
+#tab-button-container {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    display: flex;
+    justify-content: space-between;
+    min-width: 1000px;
+    height: 7vh;
+    width: 100%;
+}
+#tab-button-container.hidden { transform: translateY(6vh); }
+
+.tab-nav {
+    background-color: rgb(235, 235, 235);
+    border: none;
+    flex: 1;
+    font-size: 1.5rem;
+    text-align: center;
+    white-space: nowrap;
+}
+.tab-nav:hover {
+    cursor: pointer;
+    font-size: 1.6rem;
+}
