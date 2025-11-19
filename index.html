@@ -59,7 +59,7 @@
 
     
     <!-- Lecture Notebook Contents -->
-    <iframe id="notebook" src="notebooks/introduction.jl" frameborder="0"></iframe>
+    <iframe id="notebook" src="notebooks/introduction.html" frameborder="0"></iframe>
     
     <!-- Next/Previous Tab Buttons -->
     <div id="tab-button-container">
@@ -120,7 +120,7 @@
         /*          TAB CONTENTS          */
 
 
-        const notebook = document.getElementById('notebook'); // Featured Pluto.jl file saved in HTML format
+        const notebook = document.getElementById('notebook'); // Featured Pluto.html file saved in HTML format
 
 
         /* TAB NAVIGATION */
@@ -149,7 +149,7 @@
 
             // Update tab index, displayed HTML file, and navigation buttons
             tabIdx = newIdx
-            notebook.src = "notebooks/" + tabContents[tabIdx].name + ".jl";
+            notebook.src = "notebooks/" + tabContents[tabIdx].name + ".html";
             if (tabIdx > 0) { tabBack.innerHTML = "◀ " + tabContents[tabIdx-1].title; }
             if (tabIdx < numTabs - 1) { tabFwd.innerHTML = tabContents[tabIdx+1].title + " ▶"; }
             
@@ -167,4 +167,5 @@
         
     </script>
 </body>
+
 </html>
