@@ -90,7 +90,7 @@ delt1       = 1 - delta
 grate       = (1 + eta) * (1 + gamma)
 
 # Load NIPA data
-raw         = readdlm("DATA/observables.dat", Any) 
+raw         = readdlm("../DATA/observables.dat", Any) 
 mask        = map(x -> !(x isa AbstractString && startswith(String(x), "%")), raw[:, 1])
 observables = raw[mask, :]
 
