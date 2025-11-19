@@ -23,13 +23,7 @@ jobs:
 
       - name: Build slider outputs
         run: >
-          julia -e '
-          using PlutoSliderServer;
-          PlutoSliderServer.build_directory(
-              "notebooks";
-              Export_baked_notebooks=true,
-              Export_pluto_sliders=true
-          );'
+          julia -e 'using PlutoSliderServer; PlutoSliderServer.export_directory("notebooks/")'
 
       - name: Upload to GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
