@@ -1,17 +1,29 @@
 ### A Pluto.jl notebook ###
-# v0.20.20
+# v0.20.21
 
 using Markdown
 using InteractiveUtils
+
+# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
+macro bind(def, element)
+    #! format: off
+    return quote
+        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
+        local el = $(esc(element))
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
+        el
+    end
+    #! format: on
+end
 
 # ╔═╡ 1364f195-24f6-47e6-9a46-33690195d836
 # Required Packages
 using DelimitedFiles, LinearAlgebra, Measures, Plots, Plotly, PlotlyBase, PlotlyKaleido
 
-# ╔═╡ d729260f-ef2a-4198-b14b-b5b25289a337
+# ╔═╡ ad79fec6-01ae-4b0d-901c-66d21de44a20
 begin
 	using PlutoUI
-	TableOfContents()
+	@bind beta Slider(0.93:0.01:1.00, default=0.98, show_value=true)
 end
 
 # ╔═╡ 08e50dde-b685-11f0-adeb-bdcc51244b10
@@ -43,10 +55,12 @@ We now show that this basic growth model generates grossly counterfactual predic
 > **Note:** Discussions of US data sources, adjustments made to construct the empirical counterparts of the model variables, the parameterization used for the model, and the parameter values used to compute the equilibrium path here are summarized in the [Appendix](https://users.cla.umn.edu/~erm/data/sr369/APPENDIX/sr395_0909.pdf) to [McGrattan and Prescott (2010)](https://www.aeaweb.org/articles?id=10.1257/mac.2.4.88).
 "
 
+# ╔═╡ 2ad4e58f-0d7e-4667-9823-b0a13c6892dd
+md"**β:**"
+
 # ╔═╡ dd9da155-a8b1-4343-a2e9-9a63d02704df
 # Set fixed parameter values
 begin
-	beta    = 0.98000000
 	delta   = 0.03057458
 	eta     = 0.01000000
 	gamma   = 0.02000000
@@ -377,6 +391,11 @@ end
 
 # ╔═╡ 3adda442-1bd7-4047-b216-2a27583bb1b9
 plot2()
+
+# ╔═╡ d729260f-ef2a-4198-b14b-b5b25289a337
+begin
+	TableOfContents()
+end
 
 # ╔═╡ 1b07622a-4312-4e2e-afed-08a7c23c351f
 begin
@@ -1679,6 +1698,8 @@ version = "1.9.2+0"
 # ╔═╡ Cell order:
 # ╟─08e50dde-b685-11f0-adeb-bdcc51244b10
 # ╠═1364f195-24f6-47e6-9a46-33690195d836
+# ╟─2ad4e58f-0d7e-4667-9823-b0a13c6892dd
+# ╟─ad79fec6-01ae-4b0d-901c-66d21de44a20
 # ╠═dd9da155-a8b1-4343-a2e9-9a63d02704df
 # ╠═b82d475c-87b6-44b3-9b4b-c98b08bd8b40
 # ╠═15aca657-4b7d-490b-bdc1-fff62ecf23e6
