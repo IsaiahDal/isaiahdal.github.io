@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Measuring Business Productivity and Value</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jszip"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"> <!-- For Montserrat font-family-->
     <link rel="stylesheet" href="styles.css"> <!-- Page Layout -->
 </head>
@@ -52,8 +53,13 @@
         <button id="intangible" class="toc-entry"><p>Extended Theory With Intangible Investment</p></button>
     </div>
 
+    <!-- Data Download Button -->
+    
+        <button id="data-download">Download Data ⤓</button>
+
+    
     <!-- Lecture Notebook Contents -->
-    <iframe id="notebook" src="notebooks/introduction.html" frameborder="0"></iframe>
+    <iframe id="notebook" src="notebooks/introduction.jl" frameborder="0"></iframe>
     
     <!-- Next/Previous Tab Buttons -->
     <div id="tab-button-container">
@@ -143,7 +149,7 @@
 
             // Update tab index, displayed HTML file, and navigation buttons
             tabIdx = newIdx
-            notebook.src = "notebooks/" + tabContents[tabIdx].name + ".html";
+            notebook.src = "notebooks/" + tabContents[tabIdx].name + ".jl";
             if (tabIdx > 0) { tabBack.innerHTML = "◀ " + tabContents[tabIdx-1].title; }
             if (tabIdx < numTabs - 1) { tabFwd.innerHTML = tabContents[tabIdx+1].title + " ▶"; }
             
