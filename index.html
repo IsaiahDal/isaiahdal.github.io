@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Measuring Business Productivity and Value</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jszip"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"> <!-- For Montserrat font-family-->
+    <link rel="stylesheet" href="styles.css"> <!-- Page Layout -->
+</head>
+
+<body>
+
+    <!-- Top Ribbon -->
+    <header>
+        <div id="header-left">
+
+            <!-- Table of Contents Toggle Button-->
+            <button id="toc-toggle" onclick="toggleTOC()">☰</button>
+
+            <!-- Link to GitHub Repository -->
+            <a href="https://github.com/IsaiahDal/isaiahdal.github.io" target="_blank">
+                <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="GitHub Link" id="github-link">
+            </a>
+
+            <!-- Title and Author -->
+            <h1><a href="https://www.aeaweb.org/articles?id=10.1257/mac.2.4.88" target = "_blank">Measuring Business Productivity and Value</a>
+                <br>
+                <a href="http://users.econ.umn.edu/~erm/" target = "_blank" class="author">Ellen McGrattan</a>
+            </h1>
+
+        </div>
+
+        <!-- Link to HHEI -->
+        <div id="hhei-image">
+            <a href="https://cla.umn.edu/heller-hurwicz" target="_blank">
+                <img src="https://cla.umn.edu/sites/cla.umn.edu/files/HHEI%20wordmark.png" alt="Heller-Hurwicz Economics Institute" id="HHEI-Logo">
+            </a>
+        </div>
+
+    </header>
+
+    <!-- Table of Contents -->
+    <div id="toc" class="hidden">
+        <h2>Contents</h2>
+        <!-- Add new HTML page buttons here -->
+        <button id="introduction" class="toc-entry" style="font-weight: bold;"><p>Introduction</p></button>
+        <button id="neoclassical" class="toc-entry"><p>The Basic Neoclassical Growth Model</p></button>
+        <button id="nonneutralTFP" class="toc-entry"><p>Modeling Non-Neutral TFP</p></button>
+        <button id="evidenceIntangible" class="toc-entry"><p>Evidence of Increased Intangible Investment</p></button>
+        <button id="intangible" class="toc-entry"><p>Extended Theory With Intangible Investment</p></button>
+    </div>
+
+    <!-- Data Download Button -->
+    
+        <button id="data-download">Download Data ⤓</button>
+
+    
+    <!-- Lecture Notebook Contents -->
+    <iframe id="notebook" src="notebooks/introduction.html" frameborder="0"></iframe>
+    
+    <!-- Next/Previous Tab Buttons -->
+    <div id="tab-button-container">
+        <button id ="tabBack" class="tab-nav" onclick="changeTab(tabIdx-1)" style="display: none;">◀ The Basic Neoclassical Growth Model</button>
+        <button id ="tabFwd" class="tab-nav" onclick="changeTab(tabIdx+1)" style="display: block;">Extended Theory with Intangible Investment ▶</button>
+    </div>
+
+
+    <script>
+        
+        /*            TABLE OF CONTENTS           */
+        
+
+        /* CONSTRUCT TABLE OF CONTENTS */
+
+        // Query all TOC buttons
+        const toc = document.getElementById('toc');
+        const tocEntries = toc.querySelectorAll('.toc-entry');
+
+        // Add file names and titles to array
+        const tabContents = Array.from(tocEntries).map(item => ({
+            name: item.id,
+            title: item.textContent
+        }));
+
+        // Number TOC and change to clicked tab
+        tocEntries.forEach((item, index) => {
+            item.querySelector('p').textContent = `${index + 1}. ${item.textContent}`
+            item.addEventListener('click', () => {
+                changeTab(index);
+                toggleTOC(); // Close TOC after tab selected
+            });
+        });
+
+
+
+        /* TOGGLE TABLE OF CONTENTS */
+
+        const tocToggle = document.getElementById('toc-toggle');
+        let isHidden = true;
+
+        // Toggle functionality
+        function toggleTOC() {
+            // Show TOC, hide previous/next buttons, and blur tab contents when TOC open
+            toc.classList.toggle('hidden');
+            document.getElementById('tab-button-container').classList.toggle('hidden');
+            notebook.classList.toggle('blurred');
+
+            isHidden = !isHidden;
+
+            // Update toggle button appearance
+            tocToggle.textContent = isHidden ? "☰" : "X";
+        }
+        
+
+
+
+        /*          TAB CONTENTS          */
+
+
+        const notebook = document.getElementById('notebook'); // Featured Pluto.jl file saved in HTML format
+
+
+        /* TAB NAVIGATION */
+
+        let tabIdx = 0 // Tracks index of current tab
+        const numTabs = tabContents.length
+        const tabBack = document.getElementById('tabBack'); // "Previous tab" button
+        const tabFwd = document.getElementById('tabFwd'); // "Next tab" button
+
+        // Tab change functionality
+        function changeTab(newIdx) {
+
+            // Bold selected tab in TOC
+            document.getElementById(tabContents[tabIdx].name).style.fontWeight = "normal";
+            document.getElementById(tabContents[newIdx].name).style.fontWeight = "bold";
+
+            // Update navigation buttons at bottom of page
+            if (newIdx === 0) {
+                tabBack.style.display = "none";
+            } else if (newIdx === numTabs - 1) {
+                tabFwd.style.display = "none";  
+            } else {
+                tabBack.style.display = "block";
+                tabFwd.style.display = "block";
+            }
+
+            // Update tab index, displayed HTML file, and navigation buttons
+            tabIdx = newIdx
+            notebook.src = "notebooks/" + tabContents[tabIdx].name + ".html";
+            if (tabIdx > 0) { tabBack.innerHTML = "◀ " + tabContents[tabIdx-1].title; }
+            if (tabIdx < numTabs - 1) { tabFwd.innerHTML = tabContents[tabIdx+1].title + " ▶"; }
+            
+        }
+
+        // Change tab when arrow keys clicked
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "ArrowLeft" && tabIdx > 0) {
+                changeTab(tabIdx - 1)
+            } 
+            else if (event.key === "ArrowRight" && tabIdx < (numTabs - 1)) {
+                changeTab(tabIdx + 1)
+            }
+        });
+        
+    </script>
+</body>
+</html>
