@@ -42,19 +42,27 @@ Click "+ _Create a **new notebook**_, which will open the following in a new tab
 ##### a. Add New Cells
 
 * Place your cursor over the cell immediately above or below where you wish to add the new cell.
+
   * Click the "Add cell" (+) button that appears to the top left of the cell to add the new cell above the current cell.
+  
   * Click the button that appears to the bootom left of the cell to add the new cell below the current cell.
+ 
     * You can also use `CTRL + Enter` (or `CMD + enter`) to add a cell below the current cell.
    
 * Pluto allows you to divide code into separate cells.
+
   * The two most important types of code cells are:
+ 
     * **Julia** cells, which contain the executable code of the notebook.
+ 
     * **Markdown** cells, which are used to annotate the Julia code.
  
 ###### i. Julia Cells
 
 * Each code cell is assumed to be written in Julia by default.
+
 * All cells of more than one line must be wrapped in a single code block, such as a `function` or a `begin`-`end` block.
+
 * Cells are run in sequential order.
 
 ###### ii. Markdown Cells
@@ -68,26 +76,43 @@ Your markdown text here
 ```
 
 * Within these cells, you can use all formatting options available in traditional .md files.
-* Pluto Markdown cells natively support $LaTeX$, which allows you to format mathematical expressions
+
+* Pluto Markdown cells natively support $\LaTeX$, which allows you to format mathematical expressions.
 
 ##### b. Deleting Cells
 
-* Hover your cursor over the cell you wish to delete, and click the "Actions" button that appears in the top right of the cell
-* Select "Delete cell"
+* Hover your cursor over the cell you wish to delete, and click the "Actions" button that appears in the top right of the cell.
+
+* Select "Delete cell".
 
 ##### c. Toggling Cell Visibility
 
 * Hover your cursor over the cell you wish to toggle
+
 * Click the "Show/hide code" (👁) button that appears to the left of the cell to toggle visibility.
+
   * When a code cell is hidden, the cell's output remains visible. Only the code itself is hidden.
+
   * The visibility status of each cell is preserved when exporting to HTML in step 4.
 
 > **NOTE**: The above is meant only as a brief introduction to using Pluto notebooks. For a more thorough tutorial of Pluto, visit its [official documentation](https://plutojl.org/en/docs/).
 
+
 #### 4. Export to HTML
 
+> **IMPORTANT**: Make sure that all code (including Markdown) that you do not wish to display is hidden before exporting.
+
+* Click the export button located at the top right of the Pluto.jl notebook (pictured below).
+ 
+* Select **Static HTML**, then **Download HTML File**.
+ 
+  * Note that the downloaded HTML file will have the same name as the corresponding .jl file.
+
+![Export](images/exportbutton.jpg)
 
 #### 5. Upload Files to GitHub
+
+
 
 ---
 
