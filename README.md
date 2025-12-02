@@ -18,7 +18,7 @@ Install the following software and packages:
 
 > **IMPORTANT**: When adding or editing pages, see [style.md](https://github.com/IsaiahDal/isaiahdal.github.io/blob/main/style.md) for some basic coding and style standards.
 
-#### 1. Open Pluto's Code Editor
+### 1. Open Pluto's Code Editor
 
 * Open the Julia REPL by entering `julia` into your terminal.
 * Paste the following line into the Julia REPL to open Pluto's code editor:
@@ -31,15 +31,15 @@ A tab similar to the one pictured below should open in your browser:
 
 ![PlutoWelcome](images/PlutoWelcome.png)
 
-#### 2. Create a New Notebook
+### 2. Create a New Notebook
 
 Click "+ _Create a **new notebook**_, which will open the following in a new tab:
 
 ![PlutoBlank](images/PlutoBlank.png)
 
-#### 3. Add to the Notebook
+### 3. Add to the Notebook
 
-##### a. Add New Cells
+#### a. Add New Cells
 
 * Place your cursor over the cell immediately above or below where you wish to add the new cell.
 
@@ -47,7 +47,7 @@ Click "+ _Create a **new notebook**_, which will open the following in a new tab
   
   * Click the button that appears to the bootom left of the cell to add the new cell below the current cell.
  
-    * You can also use `CTRL + Enter` (or `CMD + enter`) to add a cell below the current cell.
+    * You can also use `Ctrl + Enter` (or `Cmd + enter`) to add a cell below the current cell.
    
 * Pluto allows you to divide code into separate cells.
 
@@ -57,7 +57,7 @@ Click "+ _Create a **new notebook**_, which will open the following in a new tab
  
     * **Markdown** cells, which are used to annotate the Julia code.
  
-###### i. Julia Cells
+##### i. Julia Cells
 
 * Each code cell is assumed to be written in Julia by default.
 
@@ -65,7 +65,7 @@ Click "+ _Create a **new notebook**_, which will open the following in a new tab
 
 * Cells are run in sequential order.
 
-###### ii. Markdown Cells
+##### ii. Markdown Cells
 
 * Pluto also supports Markdown cells, which use the following syntax:
 
@@ -79,13 +79,13 @@ Your markdown text here
 
 * Pluto Markdown cells natively support $\LaTeX$, which allows you to format mathematical expressions.
 
-##### b. Deleting Cells
+#### b. Deleting Cells
 
 * Hover your cursor over the cell you wish to delete, and click the "Actions" button that appears in the top right of the cell.
 
 * Select "Delete cell".
 
-##### c. Toggling Cell Visibility
+#### c. Toggling Cell Visibility
 
 * Hover your cursor over the cell you wish to toggle
 
@@ -98,7 +98,7 @@ Your markdown text here
 > **NOTE**: The above is meant only as a brief introduction to using Pluto notebooks. For a more thorough tutorial of Pluto, visit its [official documentation](https://plutojl.org/en/docs/).
 
 
-#### 4. Export to HTML
+### 4. Export to HTML
 
 > **IMPORTANT**: Make sure that all code (including Markdown) that you do not wish to display is hidden before exporting.
 
@@ -110,9 +110,34 @@ Your markdown text here
 
 ![Export](images/exportbutton.jpg)
 
-#### 5. Upload Files to GitHub
+### 5. Update index.html
 
+The following example assumesyou wish to add _keynes.html_, which has the title "In the long run, we are all dead", to the site.
 
+* Dowload index.html and open in your code editor.
+
+* Use `Ctrl + F` (or `Cmd + F`) and enter:
+```
+Add new HTML page buttons here
+```
+
+* This will bring you to the toc (Table of Contents) div.
+
+* Add a button for the new page **in the location you wish it to appear in the table of contents**, using the following syntax:
+
+```
+<button id="keynes" class="toc-entry"><p>In the long run, we are all dead</p></button>
+```
+
+### 6. Upload Files to GitHub
+
+This includes:
+
+* Uploading the Pluto notebook source file (.jl) and static HTML (.html) to the `notebooks` subdirectory.
+
+* Uploading the updated `index.html` to the top of this repository.
+
+* Uploading any _new_ data files to the `DATA` subdirectory.
 
 ---
 
@@ -120,23 +145,11 @@ Your markdown text here
 
 > **IMPORTANT**: When adding or editing pages, see [style.md](https://github.com/IsaiahDal/isaiahdal.github.io/blob/main/style.md) for some basic coding and style standards.
 
-### 1. Export Pluto.jl Notebook to HTML
-
-> Make sure that all code (including Markdown) that you do not wish to display is hidden before exporting by clicking the _Show/hide code_ (👁) button located near the top left of each code cell.
-
-Click the export button located at the top right of the Pluto.jl notebook (see below). Select **Static HTML**, then **Download HTML File**. Note that the downloaded HTML file will have the same name as the corresponding .jl file. Once exported, upload the HTML file to the notebook subdirectory of this repository.
-
-![Export](images/exportbutton.jpg)
+### 
 
 ### 2. Update index.html
 
-The following example assumes that the file you wish to add is named _keynes.html_ and has the title "In the long run, we are all dead".
 
-Open index.html in your code editor. Find the toc (Table of Contents) div, which can be done by using `Ctrl (or Cmd) + F` and entering _Add new HTML page buttons here_. Add a button for the new HTML file **in the location that you wish it to appear in the table of contents**. Use the following syntax:
-
-```
-<button id="keynes" class="toc-entry">In the long run, we are all dead</button>
-```
 
 ### 3. Upload Data
 
