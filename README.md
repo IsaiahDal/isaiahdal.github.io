@@ -7,8 +7,11 @@ Below are instructions to _update_ the contents of the site. For instructions on
 Install the following software and packages:
 
 * [Julia](https://julialang.org/)
+
 * [Pluto.jl](https://plutojl.org/)
+
 * [VSCode](https://code.visualstudio.com/)
+
   * You may also use another code editor with support for Julia and HTML/CSS/JS. However, this guide assumes that you are using VSCode.
  
 > **IMPORTANT**: When adding or editing pages, see [style.md](https://github.com/IsaiahDal/isaiahdal.github.io/blob/main/style.md) for some basic coding and style standards.
@@ -26,13 +29,13 @@ using Pluto; Pluto.run()
 
 A tab similar to the one pictured below should open in your browser:
 
-![PlutoWelcome](images/PlutoWelcome.jpg)
+![PlutoWelcome](images/PlutoWelcome.png)
 
 #### 2. Create a New Notebook
 
 Click "+ _Create a **new notebook**_, which will open the following in a new tab:
 
-![PlutoBlank](images/PlutoBlank.jpg)
+![PlutoBlank](images/PlutoBlank.png)
 
 #### 3. Add to the Notebook
 
