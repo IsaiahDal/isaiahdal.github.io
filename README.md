@@ -13,10 +13,10 @@ Install the following software and packages:
 * [VSCode](https://code.visualstudio.com/)
 
   * You may also use another code editor with support for Julia and HTML/CSS/JS. However, this guide assumes that you are using VSCode.
- 
-> **IMPORTANT**: When adding or editing pages, see [style.md](https://github.com/IsaiahDal/isaiahdal.github.io/blob/main/style.md) for some basic coding and style standards.
 
 ## Adding a New Page
+
+> **IMPORTANT**: When adding or editing pages, see [style.md](https://github.com/IsaiahDal/isaiahdal.github.io/blob/main/style.md) for some basic coding and style standards.
 
 #### 1. Open Pluto's Code Editor
 
@@ -92,6 +92,8 @@ Your markdown text here
 ---
 
 ## Editing an Existing Page
+
+> **IMPORTANT**: When adding or editing pages, see [style.md](https://github.com/IsaiahDal/isaiahdal.github.io/blob/main/style.md) for some basic coding and style standards.
 
 ### 1. Export Pluto.jl Notebook to HTML
 
