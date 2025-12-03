@@ -46,7 +46,7 @@ Click "+ _Create a **new notebook**_, which will open the following in a new tab
 
   * Click the "Add cell" (+) button that appears to the top left of the cell to add the new cell above the current cell.
   
-  * Click the button that appears to the bootom left of the cell to add the new cell below the current cell.
+  * Click the button that appears to the bottom left of the cell to add the new cell below the current cell.
  
     * You can also use `Ctrl + Enter` (or `Cmd + enter`) to add a cell below the current cell.
    
