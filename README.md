@@ -261,14 +261,26 @@ This includes:
 
 ## IV. Files in this directory
 
+### DATA
+
+All data files used in the site.
+
 ### index.html
 
 The main HTML page. Used to house navigate between the static HTML notebooks.
 
-### styles.css
+### images
 
-CSS styles for index.html.
+All images used in this README.
 
 ### notebooks
 
 All Pluto.jl notebooks, including both the source code and static HTML.
+
+### style.md
+
+Some basic coding and style standards.
+
+### styles.css
+
+CSS styles for index.html.
