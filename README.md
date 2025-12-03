@@ -1,6 +1,6 @@
 # Measuring Business Value and Productivity Beta Site
 
-Below are instructions to _update_ the contents of the site. For instructions on using the site, consult [the introduction included in the site](https://isaiahdal.github.io/).
+Below are instructions to **update the site itself**. For instructions on using the site, consult the site's [introduction page](https://isaiahdal.github.io/).
 
 ## I. Setup
 
@@ -8,7 +8,29 @@ Install the following software and packages:
 
 * [Julia](https://julialang.org/)
 
+You can install Julia directly through a terminal by enterting the following lines:
+
+**Windows**
+```
+winget install julia -s msstore
+```
+
+**MacOS/Linux**
+```
+curl -fsSL https://install.julialang.org
+```
+
+You can also manually install Julia from its [download page](https://julialang.org/downloads/).
+
+Once installed, you can open the Julia REPL (Read-Eval-Print Loop) by entering `julia` into the terminal.
+
 * [Pluto.jl](https://plutojl.org/)
+
+Enter the following line into the Julia REPL to add the Pluto package:
+
+```
+import Pkg; Pkg.add("Pluto")
+```
 
 * [VSCode](https://code.visualstudio.com/)
 
