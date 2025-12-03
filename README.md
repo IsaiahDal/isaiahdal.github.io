@@ -179,6 +179,20 @@ This includes:
     * Click the "**Edit** or **run** this notbeook" button at the top right of the page.
 
     * Follow the instructions that appear under **On your computer**.
+   
+      * This will download the lecture to your device as "notebook.jl".
+    
+      * Rename the notebook using your file explorer, or using the following shell commands **in the directory where the notebook is located**:
+
+**Windows**
+```
+Rename-Item "notebook.jl" "newname.jl"
+```
+
+**MacOS/Linux**
+```
+mv notebook.jl newname.jl
+```
 
   * **OR**
 
@@ -210,6 +224,22 @@ unzip MeasurementData-main.zip -d DATA
 ```
 
 Alternatively, you can download individual files from [this repository](https://github.com/IsaiahDal/MeasurementData).
+
+#### c. Organize Files
+
+* As it is currently written, all code in the lectures assumes the following organizational structure:
+
+  * All data is in a directory called "DATA".
+
+   * All code is in a single directory.
+
+     * While this directory does not need to have a specific name, assume it is called "notebooks" for the duration of this example.
+
+  * Both the "DATA" and "notebooks" directories are at located the top level of the SAME directory.
+ 
+  * Ensure that your files are organized as such before proceeding, using a terminal or file explorer to move files if necessary.
+
+    * Alternatively, you may choose to edit the lines of code that load the data to reflect the relative location of the data as is. This approach is not recommended, as it requires updating each affected line of code individually.
 
 ### 2. Make Your Desired Edits
 
