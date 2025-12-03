@@ -21,6 +21,7 @@ Install the following software and packages:
 ### 1. Open Pluto's Code Editor
 
 * Open the Julia REPL by entering `julia` into your terminal.
+
 * Paste the following line into the Julia REPL to open Pluto's code editor:
 
 ```
@@ -147,19 +148,51 @@ This includes:
 
 ### 
 
-### 2. Update index.html
+### 1. Download and Open the Notebook
 
+* This can be done in one of two ways.
 
+  * Visit the corresponding page on the [live site](https://isaiahdal.github.io/).
 
-### 3. Upload Data
+    * Click the "**Edit** or **run** this notbeook" button at the top right of the page.
 
-Upload any _new_ data files to the "DATA" subdirectory.
+    * Follow the instructions that appear under **On your computer**.
 
-## Files
+  * **OR**
+
+  * Download the .jl source file from the `notebooks` subdirectory of this repository.
+
+    * Follow step 1 under "Adding a Page" to open Pluto's code editor.
+ 
+    * Copy and paste the path to the file into **Open a notebook** and click "Open".
+
+      * By default, Pluto will interpret the path relative to your current working directory.
+ 
+      * You may also copy and paste the absolute path to the file. This may help avoid any confusion as to the file's location.
+
+### 2. Make Your Desired Edits
+
+See step 3 under "Adding a Page" for a brief introduction to Pluto notebooks.
+
+### 3. Export to HTML
+
+See step under "Adding a Page".
+
+### 6. Upload Files to GitHub
+
+This includes:
+
+* Uploading the updated Pluto notebook source file (.jl) and static HTML (.html) to the `notebooks` subdirectory.
+
+* Uploading any _new_ data files to the `DATA` subdirectory.
+
+---
+
+## Files in this directory
 
 ### index.html
 
-The main HTML page. Used to display and navigate between the HTML files created in Pluto.jl.
+The main HTML page. Used to house navigate between the static HTML notebooks.
 
 ### styles.css
 
@@ -167,4 +200,4 @@ CSS styles for index.html.
 
 ### notebooks
 
-All Pluto.jl notebooks, rendered to static HTML.
+All Pluto.jl notebooks, including both the source code and static HTML.
