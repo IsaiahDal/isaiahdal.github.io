@@ -178,7 +178,7 @@ See step 3 under "Adding a Page" for a brief introduction to Pluto notebooks.
 
 See step under "Adding a Page".
 
-### 6. Upload Files to GitHub
+### 4. Upload Files to GitHub
 
 This includes:
 
