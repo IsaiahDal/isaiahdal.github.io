@@ -168,9 +168,9 @@ This includes:
 
 > **IMPORTANT**: When adding or editing pages, see [style.md](https://github.com/IsaiahDal/isaiahdal.github.io/blob/main/style.md) for some basic coding and style standards.
 
-### 
+### 1. Download Files
 
-### 1. Download and Open the Notebook
+#### a. Download and Open the Notebook
 
 * This can be done in one of two ways.
 
@@ -191,6 +191,25 @@ This includes:
       * By default, Pluto will interpret the path relative to your current working directory.
  
       * You may also copy and paste the absolute path to the file. This may help avoid any confusion as to the file's location.
+
+#### b. Download Data
+
+* You can download a ZIP file of all data used throughout the lectures by clicking the "Download Data" button on [the live site](https://isaiahdal.github.io/).
+
+* Then, you can extract the data files into a directory called "DATA" by using the following shell commands **in the directory where the ZIP file is located**:
+
+**Windows**
+```
+Expand-Archive -Path MeasurementData-main.zip -DestinationPath DATA
+```
+
+**MacOS/Linux**
+```
+mkdir -p DATA
+unzip MeasurementData-main.zip -d DATA
+```
+
+Alternatively, you can download individual files from [this repository](https://github.com/IsaiahDal/MeasurementData).
 
 ### 2. Make Your Desired Edits
 
