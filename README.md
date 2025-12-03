@@ -176,7 +176,7 @@ See step 3 under "Adding a Page" for a brief introduction to Pluto notebooks.
 
 ### 3. Export to HTML
 
-See step under "Adding a Page".
+See step 4 under "Adding a Page".
 
 ### 4. Upload Files to GitHub
 
