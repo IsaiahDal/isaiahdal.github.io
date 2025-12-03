@@ -113,7 +113,7 @@ Your markdown text here
 
 ### 5. Update index.html
 
-The following example assumesyou wish to add _keynes.html_, which has the title "In the long run, we are all dead", to the site.
+The following example assumes you wish to add _keynes.html_, which has the title "In the long run, we are all dead", to the site.
 
 * Dowload index.html and open in your code editor.
 
