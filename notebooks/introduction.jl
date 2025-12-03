@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.20
+# v0.20.21
 
 using Markdown
 using InteractiveUtils
@@ -25,35 +25,116 @@ html"""
 """
 
 # ╔═╡ 38cf0000-b8ca-11f0-a3c7-098a3812f68c
-md""" This website provides a set of lectures on measuring business productivity and value. Each lecture is designed to allow you to download the associated data and accompanying code, as well as make edits and upload your own data. **Please follow all setup steps below before proceeding to the lectures.**
+md""" This website provides a set of lectures on measuring business productivity and value. Each lecture is designed to allow you to download the associated data and accompanying code, as well as make edits and upload your own data. **Please read through the entire introduction before proceeding to the lectures.**
 
-## Setup
+# Setup
 
-### Required Tools
+## 1 Installing Julia and Pluto.jl
 
-#### Julia
+Before proceeding to the lectures, install the following software and package(s) onto your device.
 
-All code on this site is written in [Julia](https://julialang.org/), a high-performance, open-source dynamic programming language. Several learning tools and resources for the Julia language exist, [including those focused on its applications in quantitative economics](https://julia.quantecon.org/intro.html).
+### 1.1 Julia
 
-#### Pluto.jl
+All code on this site is written in [Julia](https://julialang.org/), a high-performance, open-source dynamic programming language. If you are unfamiliar with the Julia language, several learning tools and resources for the Julia language exist, [including those focused on its applications in quantitative economics](https://julia.quantecon.org/intro.html).
 
-Each page on this site is built using [Pluto.jl](https://plutojl.org/), a programming environment designed for interactive and reproducible work. Each Pluto "notebook" exists as its own .jl file and can be easily rendered to PDF or HTML format in Pluto's built-in code editor. Once Julia is installed on your device, installing Pluto.jl is as simple as entering the following line into the Julia REPL: 
+You can install Julia directly through a terminal by enterting the following lines:
 
-`import Pkg; Pkg.add("Pluto")`
+**Windows**
+```
+winget install julia -s msstore
+```
 
-For a brief introduction to working with Pluto, consult the [Pluto.jl documentation site](https://plutojl.org/en/docs/).
+**MacOS/Linux**
+```
+curl -fsSL https://install.julialang.org
+```
 
-### Downloading Data and Code Files
+You can also manually install Julia from its [download page](https://julialang.org/downloads/).
 
-#### Data
+Once installed, you can open the Julia REPL (Read-Eval-Print Loop) by entering `julia` into the terminal.
 
-All data used on this site are available for download at [this repository](https://github.com/IsaiahDal/isaiahdal.github.io/tree/main/DATA). Alternatively, if you have Git installed, you can clone the site's repository using `git clone https://github.com/IsaiahDal/isaiahdal.github.io`. Then, all data used on this site are included in the **DATA** subdirectory.
+### 1.2 Pluto.jl
 
-> **IMPORTANT:** As they are given, all code files assume that all required data are located in a subdirectory called **DATA**, in the same directory as the Pluto notebook that uses it. To ensure that the code runs as expected, update the location of the data files (or the lines of code that load the files) accordingly.
+Each page on this site is built using [Pluto.jl](https://plutojl.org/), a Julia package and programming environment designed for creating interactive and reproducible work. Each Pluto "notebook" exists as its own .jl file, and is easily exportable to PDF or HTML format in Pluto's built-in code editor. Once Julia is installed on your device, installing Pluto.jl is as simple as entering the following line into the Julia REPL: 
 
-#### Code
+```
+import Pkg; Pkg.add("Pluto")
+```
 
-To download, edit, and run any of the code files, simply click the _**Edit** or **run** this notebook_ button located at the top right corner of each lecture. Then, follow the given instructions to download and run the notebook on your device. If you wish to edit a notebook and save your changes, it is highly recommended that you choose the option to download and run the notebook on your computer.
+For a brief introduction to working with Pluto, consult the [official documentation](https://plutojl.org/en/docs/).
+
+## 2 Downloading Data and Code Files
+
+> **Quick Setup for Experienced Users**   If you already have experience with Julia, Pluto.jl and Git, you can
+> * Get all notebook and code files using `git clone https://github.com/IsaiahDal/isaiahdal.github.io/tree/main`, which will provide you with all code files in the expected configuration. Specifically:
+>   * All Pluto notebook files are located in a subdirectory called "notebooks".
+>   * All data used in the lectures are located in a subdirectory called "DATA".
+> * Open, run, and edit any of the lecture files in Pluto's code editor.
+> At this point, you can proceed directly to the lectures.
+
+### 2.1 Data
+
+You can download a ZIP file of all data used throughout the lectures by clicking the "Download Data" button located near the top left of your screen. Then, you can extract the data files into a directory called "DATA" by using the following shell commands in the directory where the ZIP file is located:
+
+**Windows**
+```
+Expand-Archive -Path MeasurementData-main.zip -DestinationPath DATA
+```
+
+**MacOS/Linux**
+```
+mkdir -p DATA
+unzip MeasurementData-main.zip -d DATA
+```
+
+Alternatively, you can download individual files from [this repository](https://github.com/IsaiahDal/isaiahdal.github.io/tree/main/DATA). 
+
+### 2.2 Code
+
+To download the Pluto notebook for any lecture, simply click the "**Edit** or **run** this notebook" button located at the top right corner of each lecture. A small window will appear, giving you the option to run the notebook **In the cloud** or **On your computer**. Follow step 1 under **On your computer**, which will download the lecture to your device as "notebook.jl". To avoid confusion, rename the notebook using your file explorer, or using the following shell commands in the directory where the notebook is located:
+
+**Windows**
+```
+Rename-Item "notebook.jl" "newname.jl"
+```
+
+**MacOS/Linux**
+```
+mv notebook.jl newname.jl
+```
+
+### 2.3 Organization
+
+As it is currently written, all code in the lectures assumes the following organizational structure:
+
+* All data is in a directory called "DATA".
+* All code is in a single directory. While this directory does not need to have a specific name, assume it is called "notebooks" for the duration of this example.
+* Both the "DATA" and "notebooks" directories are at located the top level of the SAME directory.
+
+Ensure that your files are organized as such before proceeding, using a terminal or file explorer to move files if necessary. _Alternatively, you may choose to edit the lines of code that load the data to reflect the relative location of the data as is. This approach is not recommended, as it requires updating each affected line of code individually._
+
+# 3 Running the Lectures
+
+Each lecture is designed to be interactive, allowing you to not only read the code but also run it yourself. Assuming all setup steps have been followed, you can open and run the code for any lecture using the following steps.
+
+i. Open the Julia REPL by entering `julia` into a terminal
+
+ii. Paste the following line into the REPL to open Pluto's code editor:
+
+
+```
+using Pluto; Pluto.run()
+```
+
+After a few seconds, a tab should open in your browser that reads **_welcome to_ Pluto**.jl.
+
+iii. Enter the path to the file into the box located below **Open a notebook** and click "Open".
+
+* By default, Pluto will interpret the path relative to your current working directory.
+
+* You may also copy and paste the absolute path to the file. This may help avoid any confusion as to the file's location.
+
+If successful, a fully interactive version of the notebook will open in a new tab.
 
 """
 
@@ -92,7 +173,7 @@ PlutoUI = "~0.7.73"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.1"
+julia_version = "1.12.2"
 manifest_format = "2.0"
 project_hash = "9eac10d740c80cc8d467c10ea0b43b3d78a6c531"
 
@@ -137,7 +218,7 @@ version = "1.11.0"
 [[deps.Downloads]]
 deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
-version = "1.6.0"
+version = "1.7.0"
 
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
@@ -191,7 +272,7 @@ version = "0.6.4"
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "OpenSSL_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
-version = "8.11.1+1"
+version = "8.15.0+0"
 
 [[deps.LibGit2]]
 deps = ["LibGit2_jll", "NetworkOptions", "Printf", "SHA"]
@@ -251,7 +332,7 @@ version = "0.3.29+0"
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.5.1+0"
+version = "3.5.4+0"
 
 [[deps.Parsers]]
 deps = ["Dates", "PrecompileTools", "UUIDs"]
@@ -377,9 +458,9 @@ uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
 version = "1.64.0+1"
 
 [[deps.p7zip_jll]]
-deps = ["Artifacts", "Libdl"]
+deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
-version = "17.5.0+2"
+version = "17.7.0+0"
 """
 
 # ╔═╡ Cell order:
