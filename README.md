@@ -2,7 +2,7 @@
 
 Below are instructions to _update_ the contents of the site. For instructions on using the site, consult [the introduction included in the site](https://isaiahdal.github.io/).
 
-## Setup
+## I. Setup
 
 Install the following software and packages:
 
@@ -14,7 +14,7 @@ Install the following software and packages:
 
   * You may also use another code editor with support for Julia and HTML/CSS/JS. However, this guide assumes that you are using VSCode.
 
-## Adding a New Page
+## II. Adding a New Page
 
 > **IMPORTANT**: When adding or editing pages, see [style.md](https://github.com/IsaiahDal/isaiahdal.github.io/blob/main/style.md) for some basic coding and style standards.
 
@@ -142,7 +142,7 @@ This includes:
 
 ---
 
-## Editing an Existing Page
+## III. Editing an Existing Page
 
 > **IMPORTANT**: When adding or editing pages, see [style.md](https://github.com/IsaiahDal/isaiahdal.github.io/blob/main/style.md) for some basic coding and style standards.
 
