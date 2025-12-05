@@ -1,0 +1,401 @@
+<!--
+
+TODO:
+1. Created loadCSV function
+2. Allow users to exclude certain variables
+3. Implement plot
+4. Implement plot, data series, and dataset download
+5. Implement changeTab
+ 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Center</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jszip"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"> <!-- For Montserrat font-family-->
+    <link rel="stylesheet" href="styles.css"> <!-- Page Layout -->
+  <style>
+
+
+    #main-content {
+      display: flex;
+      height: 77vh;
+      width: 100%;
+    }
+
+    .content-container {
+      height: 100%;
+    }
+
+    /* Table */
+
+    #table-container {
+      background-color: red;
+      display: flex;
+      overflow-y: auto;
+      width: 50%;
+    }
+
+    .table-half {
+      padding: 5px;
+      width: 50%;
+    }
+
+    .table-half h2 {
+      margin: 1vh auto 0 auto;
+      text-align: center;
+    }
+
+    .table-half p {
+      margin: 5px;
+    }
+
+    #table-left{ background-color: red;}
+
+    #table-right { background-color: blueviolet}
+
+    /* Chart */
+
+    #chart-container {
+      background-color: green;
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+    }
+
+    #download-button-container {
+      align-items: center;
+      background-color: brown;
+      box-sizing: border-box;
+      display: flex;
+      height: 15%;
+      justify-content: space-between;
+      padding: 1vh 1vw;
+      width: 100%;
+    }
+
+    #download-button-container button {
+      border-radius: 5px;
+      padding: 5px;
+    }
+
+    #download-button-container button:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+    }
+
+    #data-chart {
+      background-color: blue;
+      height: 85%;
+      width: 100%; 
+    }
+
+    /* Year Select Slider */
+
+    .slider-thumb {
+      background-color: navy;
+      border-radius: 2vh;
+      bottom: 3vh;
+      height: 4vh;
+      position: fixed;
+      width: 4vh;
+      z-index: 2;
+    }
+
+    .slider-thumb:hover {
+      cursor: grab;
+    }
+
+    #slider-thumb-left{
+      left: 4vw
+    }
+
+    #slider-thumb-right{
+      left: 94vw
+    }
+
+    #slider-years {
+      bottom: 7vh;
+      left: 50vw;
+      position: fixed;
+      transform: translateX(-50%);
+    }
+
+    #slider-track-background {
+      background-color: gray;
+      border-radius: 1vh;
+      bottom: 4vh;
+      display: flex;
+      height: 2vh;
+      left: 5vw;
+      position: fixed;
+      width: 90vw;
+    }
+    
+    #slider-track {
+      background-color: navy;
+      border-radius: 1vh;
+      bottom: 4vh;
+      display: flex;
+      height: 2vh;
+      left: 5vw;
+      position: fixed;
+      width: 90vw;
+    }
+
+  </style>
+
+</head>
+<body>
+
+  <!-- Top Ribbon -->
+  <header>
+      <div id="header-left">
+
+          <!-- Data Collection Select Toggle -->
+          <button id="toc-toggle" onclick="toggleTOC()">☰</button>
+
+          <!-- Link to GitHub Repository -->
+          <a href="https://github.com/IsaiahDal/isaiahdal.github.io" target="_blank">
+              <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="GitHub Link" id="github-link">
+          </a>
+
+          <!-- Title and Author -->
+          <h1><a href="https://www.aeaweb.org/articles?id=10.1257/mac.2.4.88" target = "_blank">Measuring Business Productivity and Value</a>
+              <br>
+          <a href="http://users.econ.umn.edu/~erm/" target = "_blank" class="author">Ellen McGrattan</a>
+          </h1>
+
+      </div>
+
+      <div style="display: flex; text-align: center; width: 30vw; padding: 3vh 1vw;">
+        <button class="tab-Btn active" onclick="location.href='dataCenter.html';">Data Center</button>    
+        <button class="tab-Btn" onclick="location.href='index.html';">Lectures 🗗</button> 
+      </div>
+
+      <!-- Link to HHEI -->
+      <div id="hhei-image">
+          <a href="https://cla.umn.edu/heller-hurwicz" target="_blank">
+              <img src="https://cla.umn.edu/sites/cla.umn.edu/files/HHEI%20wordmark.png" alt="Heller-Hurwicz Economics Institute" id="HHEI-Logo">
+          </a>
+      </div>
+
+  </header>
+
+
+
+   <!-- Data Collection Select -->
+    <div id="toc" class="hidden">
+        <h2>Datasets</h2>
+        <!-- Add new datasets here -->
+        <button id="allcorp" class="toc-entry" style="font-weight: bold;"><p>IRS SOI - All Corportations</p></button>
+        <button id="scorp" class="toc-entry"><p>IRS SOI - S Corportations</p></button>
+        <button id="partners" class="toc-entry"><p>IRS SOI - Partnerships</p></button>
+        <button id="soleprop" class="toc-entry"><p>IRS SOI - Sole Proprietors</p></button>
+    </div>
+
+  <div id="main-content">
+    <div id="table-container" class="content-container">
+      <div id="table-left" class="table-half">
+        <h2>Total Assets</h2>
+        <p>Cash</p>
+        <p>Notes and accounts receivable</p>
+        <p>Inventories</p>
+        <p>Investments in Government obligations</p>
+        <p>Tax-exempt securities</p>
+        <p>Other current assets</p>
+        <p>Loans to shareholders</p>
+        <p>Mortgage and real estate loans</p>
+        <p>Other invstments</p>
+        <p>Depreciable assets</p>
+        <p>Depletable assets</p>
+        <p>Land</p>
+        <p>Intangible assets (amortizable)</p>
+        <p>Other assets</p>
+        <p>Less: Allowance for bad debts</p>
+        <p>Less: Accumulated depreciation</p>
+        <p>Less: Accumulated depletion</p>
+        <p>Less: Accumulated amortization</p>
+      </div>
+      <div id="table-right" class="table-half">
+        <h2>Total Liabilities</h2>
+        <p>Accounts payable</p>
+        <p>Deposits and Withdrawable Shares</p>
+        <p>Mortgages, notes, and bonds payable in less than 1 year</p>
+        <p>Other current liabilities</p>
+        <p>Loans from shareholders</p>
+        <p>Mortgages, notes, and bonds payable in 1 year or more</p>
+        <p>Other liabilities</p>
+      </div>
+    </div>
+    <div id="chart-container" class="content-container">
+      <div id="download-button-container">
+        <button>Download Chart</button>
+        <button>Download Selected Series</button>
+        <button>Download Full ____ Dataset</button>
+      </div>
+
+      <!-- Chart -->
+      <canvas id="data-chart"></canvas>
+    </div>
+  </div>
+
+  <!-- Year Select Slider -->
+  <div id="slider-thumb-left" class="slider-thumb"></div>
+  <div id="slider-years">1960 - 2022</div>
+  <div id="slider-track-background"></div>
+  <div id="slider-track"></div>
+  <div id="slider-thumb-right" class="slider-thumb"></div>
+
+
+
+<script>
+
+
+      /* DATASET SELECT */
+
+    // Query all TOC buttons
+    const toc = document.getElementById('toc');
+    const tocEntries = toc.querySelectorAll('.toc-entry');
+
+    // Add file names and titles to array
+    const tabContents = Array.from(tocEntries).map(item => ({
+        name: item.id,
+        title: item.textContent
+    }));
+
+    // Number TOC and change to clicked tab
+    tocEntries.forEach((item, index) => {
+        item.querySelector('p').textContent = `${index + 1}. ${item.textContent}`
+        item.addEventListener('click', () => {
+            changeTab(index);
+            toggleTOC(); // Close TOC after tab selected
+        });
+    });
+
+
+
+    /* TOGGLE TABLE OF CONTENTS */
+
+    const tocToggle = document.getElementById('toc-toggle');
+    let isHidden = true;
+
+    // Toggle functionality
+    function toggleTOC() {
+        // Show TOC, hide previous/next buttons, and blur tab contents when TOC open
+        toc.classList.toggle('hidden');
+        document.body.classList.toggle('blurred');
+
+        isHidden = !isHidden;
+
+        // Update toggle button appearance
+        tocToggle.textContent = isHidden ? "☰" : "X";
+    }
+
+
+
+  /* Year Select */ 
+  const track = document.getElementById("slider-track");
+  const leftThumb = document.getElementById("slider-thumb-left");
+  const rightThumb = document.getElementById("slider-thumb-right");
+
+  const sliderYears = document.getElementById("slider-years");
+
+  let activeThumb = null;
+
+  function pointerDown(e) {
+    activeThumb = e.target;
+
+    document.body.style.cursor = "grabbing";
+    activeThumb.style.cursor = "grabbing";
+
+    document.body.style.userSelect = "none";
+
+    document.addEventListener("pointermove", pointerMove);
+    document.addEventListener("pointerup", pointerUp);
+  }
+
+  function pointerMove(e) {
+    if (!activeThumb) return;
+
+    const thumbWidth = activeThumb.getBoundingClientRect().width;
+
+    // Constrain inside 4vw–94vw
+    const minX = window.innerWidth * 0.04 + thumbWidth / 2;
+    const maxX = window.innerWidth * 0.94 + thumbWidth / 2;
+
+    let x = Math.max(minX, Math.min(e.clientX, maxX));
+
+    const leftRect = leftThumb.getBoundingClientRect();
+    const rightRect = rightThumb.getBoundingClientRect();
+
+    const rightLimit = rightRect.left + thumbWidth / 2;
+    const leftLimit = leftRect.right - thumbWidth / 2;
+
+
+    if (activeThumb === leftThumb) {
+      // Prevent left thumb from going past right thumb
+      x = Math.min(x, rightLimit);
+      track.style.left = `${x}px`;
+      track.style.width = `${rightLimit - x}px`;
+    }
+
+    if (activeThumb === rightThumb) {
+      // Prevent right thumb from going past left thumb
+      x = Math.max(x, leftLimit);
+      track.style.width = `${x - leftLimit}px`;
+    }
+
+    activeThumb.style.left = `${x - thumbWidth / 2}px`;
+    activeThumb.style.zIndex = "10";
+
+
+    // Update years live based on thumb positions
+    const minYear = 1960;
+    const maxYear = 2022;
+    const totalYears = maxYear - minYear;
+
+    const trackMin = window.innerWidth * 0.04;
+    const trackMax = window.innerWidth * 0.94;
+    const trackWidth = trackMax - trackMin;
+
+    const leftPx = leftThumb.getBoundingClientRect().left;
+    const rightPx = rightThumb.getBoundingClientRect().left;
+
+    const leftPercent = (leftPx - trackMin) / trackWidth;
+    const rightPercent = (rightPx - trackMin) / trackWidth;
+
+    const leftYear = Math.round(minYear + leftPercent * totalYears);
+    const rightYear = Math.round(minYear + rightPercent * totalYears);
+
+    sliderYears.textContent = `${leftYear} - ${rightYear}`;
+  }
+
+  function pointerUp() {
+    if (!activeThumb) return;
+
+    activeThumb = null;
+    document.body.style.userSelect = "auto";
+    document.removeEventListener("pointermove", pointerMove);
+    document.removeEventListener("pointerup", pointerUp);
+
+    document.body.style.cursor = "default";
+    leftThumb.style.cursor = "default";
+    rightThumb.style.cursor = "default";
+  }
+
+  [leftThumb, rightThumb].forEach(thumb => {
+    thumb.addEventListener("pointerdown", pointerDown);
+  });
+
+</script>
+
+
+</body>
+    
+</html>
