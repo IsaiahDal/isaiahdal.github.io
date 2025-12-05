@@ -18,6 +18,7 @@ header {
     justify-content: space-between;
     margin: 0px;
     min-width: 1000px;
+    max-width: 100vw;
     text-align: left;
 }
 
@@ -89,6 +90,29 @@ header h1 a::after, .toc-entry p::after {
 header h1 a::after { background: white; }
 .toc-entry p::after { background: black; }
 header h1 a:hover::after, .toc-entry p:hover::after { transform: scaleX(1); }
+
+/* Tab change buttons */
+
+.tab-Btn {
+    background-color: white;
+    border: none;
+    color: black;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 1vh 1vw;
+    width: 50%;
+}
+
+.tab-Btn:hover {
+    transform: scale(1.1);
+}
+
+.tab-Btn.active {
+    background-color: #01154f !important;
+    color: white !important;
+    transform: none !important;
+}
 
 /* HHEI Link */
 #hhei-image { padding: 0 1vw 0 1vw; }
