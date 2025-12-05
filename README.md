@@ -265,9 +265,9 @@ This includes:
 
 All data files used in the site.
 
-### dataCenter.html
+### dataCenter.html (WIP)
 
-WIP
+Used to visualize, manipulate, and download datasets.
 
 ### index.html
 
