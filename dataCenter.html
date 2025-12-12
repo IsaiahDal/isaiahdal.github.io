@@ -1,14 +1,3 @@
-<!--
-
-TODO:
-1. Created loadCSV function
-2. Allow users to exclude certain variables
-3. Implement plot
-4. Implement plot, data series, and dataset download
-5. Implement changeTab
- 
--->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,136 +8,7 @@ TODO:
     <script src="https://cdn.jsdelivr.net/npm/jszip"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"> <!-- For Montserrat font-family-->
     <link rel="stylesheet" href="styles.css"> <!-- Page Layout -->
-  <style>
-
-
-    #main-content {
-      display: flex;
-      height: 77vh;
-      width: 100%;
-    }
-
-    .content-container {
-      height: 100%;
-    }
-
-    /* Table */
-
-    #table-container {
-      background-color: red;
-      display: flex;
-      overflow-y: auto;
-      width: 50%;
-    }
-
-    .table-half {
-      padding: 5px;
-      width: 50%;
-    }
-
-    .table-half h2 {
-      margin: 1vh auto 0 auto;
-      text-align: center;
-    }
-
-    .table-half p {
-      margin: 5px;
-    }
-
-    #table-left{ background-color: red;}
-
-    #table-right { background-color: blueviolet}
-
-    /* Chart */
-
-    #chart-container {
-      background-color: green;
-      display: flex;
-      flex-direction: column;
-      width: 50%;
-    }
-
-    #download-button-container {
-      align-items: center;
-      background-color: brown;
-      box-sizing: border-box;
-      display: flex;
-      height: 15%;
-      justify-content: space-between;
-      padding: 1vh 1vw;
-      width: 100%;
-    }
-
-    #download-button-container button {
-      border-radius: 5px;
-      padding: 5px;
-    }
-
-    #download-button-container button:hover {
-      cursor: pointer;
-      transform: scale(1.1);
-    }
-
-    #data-chart {
-      background-color: blue;
-      height: 85%;
-      width: 100%; 
-    }
-
-    /* Year Select Slider */
-
-    .slider-thumb {
-      background-color: navy;
-      border-radius: 2vh;
-      bottom: 3vh;
-      height: 4vh;
-      position: fixed;
-      width: 4vh;
-      z-index: 2;
-    }
-
-    .slider-thumb:hover {
-      cursor: grab;
-    }
-
-    #slider-thumb-left{
-      left: 4vw
-    }
-
-    #slider-thumb-right{
-      left: 94vw
-    }
-
-    #slider-years {
-      bottom: 7vh;
-      left: 50vw;
-      position: fixed;
-      transform: translateX(-50%);
-    }
-
-    #slider-track-background {
-      background-color: gray;
-      border-radius: 1vh;
-      bottom: 4vh;
-      display: flex;
-      height: 2vh;
-      left: 5vw;
-      position: fixed;
-      width: 90vw;
-    }
-    
-    #slider-track {
-      background-color: navy;
-      border-radius: 1vh;
-      bottom: 4vh;
-      display: flex;
-      height: 2vh;
-      left: 5vw;
-      position: fixed;
-      width: 90vw;
-    }
-
-  </style>
+    <link rel="stylesheet" href="dcstyles.css"> <!-- Page Layout -->
 
 </head>
 <body>
@@ -166,9 +26,12 @@ TODO:
           </a>
 
           <!-- Title and Author -->
-          <h1><a href="https://www.aeaweb.org/articles?id=10.1257/mac.2.4.88" target = "_blank">Measuring Business Productivity and Value</a>
-              <br>
-          <a href="http://users.econ.umn.edu/~erm/" target = "_blank" class="author">Ellen McGrattan</a>
+          <h1>
+            <a href="https://www.aeaweb.org/articles?id=10.1257/mac.2.4.88" target = "_blank">
+              Measuring Business Productivity and Value
+            </a>
+            <br>
+            <a href="http://users.econ.umn.edu/~erm/" target = "_blank" class="author">Ellen McGrattan</a>
           </h1>
 
       </div>
@@ -187,57 +50,46 @@ TODO:
 
   </header>
 
-
-
    <!-- Data Collection Select -->
-    <div id="toc" class="hidden">
-        <h2>Datasets</h2>
-        <!-- Add new datasets here -->
-        <button id="allcorp" class="toc-entry" style="font-weight: bold;"><p>IRS SOI - All Corportations</p></button>
-        <button id="scorp" class="toc-entry"><p>IRS SOI - S Corportations</p></button>
-        <button id="partners" class="toc-entry"><p>IRS SOI - Partnerships</p></button>
-        <button id="soleprop" class="toc-entry"><p>IRS SOI - Sole Proprietors</p></button>
-    </div>
+  <div id="toc" class="hidden">
+      <h2>Datasets</h2>
+      <!-- Add new datasets here -->
+        <!-- IRS SOI -->
+      <a href="https://www.irs.gov/statistics/soi-tax-stats-statistics-of-income" target="_blank"><h3>IRS Statistics of Income (SOI)</h3></a>
+      <button id="allcorp" class="toc-entry" style="font-weight: bold;" onclick=
+        "buildTablesFromCSV(
+          'allcorp.csv',
+          'Total assets', 
+          'Other liabilities',
+          headers = ['Total assets', 'Total liabilities']
+        );"
+      ><p>All Corportations</p></button>
+      <button id="scorp" class="toc-entry"><p>S Corportations</p></button>
+      <button id="partners" class="toc-entry"><p>Partnerships</p></button>
+      <button id="soleprop" class="toc-entry"><p>Sole Proprietors</p></button>
+
+      <!-- BEA NIPA -->
+      <a href="https://apps.bea.gov/iTable/?isuri=1&reqid=19&step=4&categories=flatfiles&nipa_table_list=1" target="_blank"><h3>BEA National Income and Product Accounts (NIPA)</h3></a>
+      <button id="DomesticProductAndIncome" class="toc-entry" onclick=
+        "buildTablesFromCSV(
+          'GDPGDI.csv',
+          'Gross domestic product', 
+          'Statistical discrepancy',
+          headers = ['Gross domestic product', 'Gross domestic income']
+        );"
+      ><p> Gross Domestic Product And Income</p></button>
+  </div>
 
   <div id="main-content">
     <div id="table-container" class="content-container">
-      <div id="table-left" class="table-half">
-        <h2>Total Assets</h2>
-        <p>Cash</p>
-        <p>Notes and accounts receivable</p>
-        <p>Inventories</p>
-        <p>Investments in Government obligations</p>
-        <p>Tax-exempt securities</p>
-        <p>Other current assets</p>
-        <p>Loans to shareholders</p>
-        <p>Mortgage and real estate loans</p>
-        <p>Other invstments</p>
-        <p>Depreciable assets</p>
-        <p>Depletable assets</p>
-        <p>Land</p>
-        <p>Intangible assets (amortizable)</p>
-        <p>Other assets</p>
-        <p>Less: Allowance for bad debts</p>
-        <p>Less: Accumulated depreciation</p>
-        <p>Less: Accumulated depletion</p>
-        <p>Less: Accumulated amortization</p>
-      </div>
-      <div id="table-right" class="table-half">
-        <h2>Total Liabilities</h2>
-        <p>Accounts payable</p>
-        <p>Deposits and Withdrawable Shares</p>
-        <p>Mortgages, notes, and bonds payable in less than 1 year</p>
-        <p>Other current liabilities</p>
-        <p>Loans from shareholders</p>
-        <p>Mortgages, notes, and bonds payable in 1 year or more</p>
-        <p>Other liabilities</p>
-      </div>
+      <div id="table-left" class="table-half"></div>
+      <div id="table-right" class="table-half"></div>
     </div>
     <div id="chart-container" class="content-container">
       <div id="download-button-container">
-        <button>Download Chart</button>
-        <button>Download Selected Series</button>
-        <button>Download Full ____ Dataset</button>
+        <button id="download-chart">Download Chart</button>
+        <button id="download-series">Download Selected Series</button>
+        <button id="download-full">Download Full Dataset</button>
       </div>
 
       <!-- Chart -->
@@ -247,17 +99,20 @@ TODO:
 
   <!-- Year Select Slider -->
   <div id="slider-thumb-left" class="slider-thumb"></div>
-  <div id="slider-years">1960 - 2022</div>
+  <div id="slider-years">1959 - 2022</div>
   <div id="slider-track-background"></div>
   <div id="slider-track"></div>
   <div id="slider-thumb-right" class="slider-thumb"></div>
 
+  <button id="update-chart">Update Chart</button>
 
 
 <script>
 
+    let originalCSV = "";
 
-      /* DATASET SELECT */
+
+    /* DATASET SELECT */
 
     // Query all TOC buttons
     const toc = document.getElementById('toc');
@@ -272,12 +127,7 @@ TODO:
     // Number TOC and change to clicked tab
     tocEntries.forEach((item, index) => {
         item.querySelector('p').textContent = `${index + 1}. ${item.textContent}`
-        item.addEventListener('click', () => {
-            changeTab(index);
-            toggleTOC(); // Close TOC after tab selected
-        });
     });
-
 
 
     /* TOGGLE TABLE OF CONTENTS */
@@ -297,7 +147,8 @@ TODO:
         tocToggle.textContent = isHidden ? "☰" : "X";
     }
 
-
+  let selectedStartYear = 1959;
+  let selectedEndYear   = 2022;
 
   /* Year Select */ 
   const track = document.getElementById("slider-track");
@@ -312,7 +163,7 @@ TODO:
     activeThumb = e.target;
 
     document.body.style.cursor = "grabbing";
-    activeThumb.style.cursor = "grabbing";
+    activeThumb.classList.add("dragging");
 
     document.body.style.userSelect = "none";
 
@@ -356,7 +207,7 @@ TODO:
 
 
     // Update years live based on thumb positions
-    const minYear = 1960;
+    const minYear = 1959;
     const maxYear = 2022;
     const totalYears = maxYear - minYear;
 
@@ -374,6 +225,15 @@ TODO:
     const rightYear = Math.round(minYear + rightPercent * totalYears);
 
     sliderYears.textContent = `${leftYear} - ${rightYear}`;
+
+    selectedStartYear = leftYear;
+    selectedEndYear   = rightYear;
+
+    // If changed, show update button
+    if (selectedStartYear !== lastAppliedStart || selectedEndYear !== lastAppliedEnd) {
+      applyBtn.style.display = "block";
+    }
+
   }
 
   function pointerUp() {
@@ -385,16 +245,268 @@ TODO:
     document.removeEventListener("pointerup", pointerUp);
 
     document.body.style.cursor = "default";
-    leftThumb.style.cursor = "default";
-    rightThumb.style.cursor = "default";
+    leftThumb.classList.remove("dragging");
+    rightThumb.classList.remove("dragging");
   }
 
   [leftThumb, rightThumb].forEach(thumb => {
     thumb.addEventListener("pointerdown", pointerDown);
   });
 
-</script>
 
+
+let csvData = [];
+let csvHeaders = [];
+
+
+async function buildTablesFromCSV(fname, startRow, endRow, headers = []) {
+  const leftDiv = document.getElementById('table-left');
+  const rightDiv = document.getElementById('table-right');
+
+  leftDiv.innerHTML = '';
+  rightDiv.innerHTML = '';
+
+  const text = await fetch(fname).then(r => r.text());
+  originalCSV = text;
+  const rows = text.split(/\r?\n/).filter(r => r.trim() !== "");
+
+  csvData = [];
+  rows.forEach((row, idx) => {
+    const cols = parseCSVLine(row); // keep spaces for indentation
+    if (idx === 0) csvHeaders = cols;
+    else csvData.push(cols);
+  });
+
+  let startRowFound = false;
+  let endRowFound = false;
+  let sectionContainer = leftDiv;
+  let leftH2Found = false;
+
+  const indentStack = []; // stack of indent levels
+
+  csvData.forEach(cols => {
+    const rawValue = cols[0];
+
+    if (rawValue.includes(startRow)) startRowFound = true;
+    if (rawValue.includes(endRow)) endRowFound = true;
+    if (!startRowFound || endRowFound) return;
+
+    const value = rawValue.trim();
+    if (value.includes("Addendum")) return;
+
+    const indent = rawValue.match(/^\s*/)[0].length;
+
+    let el;
+    let level;
+
+    // Explicit h2 overrides indentation
+    if (headers.includes(value)) {
+      level = 2;
+      el = document.createElement("h2");
+
+      if (!leftH2Found) {
+        sectionContainer = leftDiv;
+        leftH2Found = true;
+      } else {
+        sectionContainer = rightDiv;
+      }
+
+      // reset stack for top-level h2
+      indentStack.length = 0;
+      indentStack.push(indent);
+    } else {
+      // Dynamically determine level using indentStack
+      while (indentStack.length && indent <= indentStack[indentStack.length - 1]) {
+        indentStack.pop();
+      }
+
+      indentStack.push(indent);
+
+      level = 3 + indentStack.length - 1; // **start at h3 instead of h2**
+      if (level > 6) {
+        el = document.createElement("p");
+      } else {
+        el = document.createElement(`h${level}`);
+      }
+    }
+
+    el.textContent = value;
+
+    // Store original CSV value for plotting
+    el.dataset.plotValue = rawValue;
+    el.style.cursor = "pointer";
+    el.addEventListener("click", () => plotVariable(el.dataset.plotValue));
+
+    sectionContainer.appendChild(el);
+  });
+
+  // Plot the first variable
+  plotVariable(startRow);
+}
+
+
+
+let lastAppliedStart = selectedStartYear;
+let lastAppliedEnd   = selectedEndYear;
+
+const applyBtn = document.getElementById("update-chart");
+
+function parseCSVLine(line) {
+  const result = [];
+  let current = "";
+  let inQuotes = false;
+
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+    const next = line[i + 1];
+
+    if (char === '"' && inQuotes && next === '"') {
+      // escaped quote
+      current += '"';
+      i++;
+    } else if (char === '"') {
+      inQuotes = !inQuotes;
+    } else if (char === ',' && !inQuotes) {
+      result.push(current);
+      current = "";
+    } else {
+      current += char;
+    }
+  }
+  result.push(current);
+  return result;
+}
+
+
+let currentVariable = null;
+
+function plotVariable(label) {
+  currentVariable = label;   // remember which line is plotted
+  updateChartRange();
+}
+
+function updateChartRange() {
+  if (!currentVariable) return;
+
+  const row = csvData.find(r => r[0] === currentVariable);
+  if (!row) return;
+
+  const allYears = csvHeaders.slice(1).map(Number);
+  const allValues = row.slice(1).map(v => parseFloat(v));
+
+  // Filter: keep points where year is within slider limits
+  const filteredYears = [];
+  const filteredValues = [];
+
+  for (let i = 0; i < allYears.length; i++) {
+    const y = allYears[i];
+    if (y >= selectedStartYear && y <= selectedEndYear) {
+      filteredYears.push(y);
+      filteredValues.push(allValues[i]);
+    }
+  }
+
+  renderChart(currentVariable, filteredYears, filteredValues);
+}
+
+
+let chart;
+
+function renderChart(label, years, values) {
+  const ctx = document.getElementById("data-chart");
+
+  if (chart) chart.destroy();
+
+  chart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: years,
+      datasets: [{
+        label: label,
+        data: values,
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false
+    },
+    plugins: [{
+      id: 'custom_canvas_background_color',
+      beforeDraw: (chartInstance) => {
+        const ctx = chartInstance.ctx;
+        ctx.save();
+        ctx.globalCompositeOperation = 'destination-over';
+        ctx.fillStyle = 'white'; // set your background color here
+        ctx.fillRect(0, 0, chartInstance.width, chartInstance.height);
+        ctx.restore();
+      }
+    }]
+  });
+}
+
+// Call it with your CSV path:
+buildTablesFromCSV(
+  "allcorp.csv",
+  "Total assets", 
+  "Other liabilities",
+  headers = ["Total assets", "Total liabilities"]
+);
+
+applyBtn.addEventListener("click", () => {
+  lastAppliedStart = selectedStartYear;
+  lastAppliedEnd   = selectedEndYear;
+
+  updateChartRange();
+
+  applyBtn.style.display = "none";
+});
+
+document.getElementById("download-chart").addEventListener("click", () => {
+  if (!chart) return;
+
+  const link = document.createElement("a");
+  link.download = `${currentVariable}.png`;
+  link.href = chart.toBase64Image();
+  link.click();
+});
+
+document.getElementById("download-series").addEventListener("click", () => {
+  if (!currentVariable) return;
+
+  const row = csvData.find(r => r[0] === currentVariable);
+  if (!row) return;
+
+  const years = csvHeaders.slice(1).map(Number);
+  const values = row.slice(1).map(v => parseFloat(v));
+
+  // Filter by selected years
+  let output = "Year,Value\n";
+  for (let i = 0; i < years.length; i++) {
+    if (years[i] >= selectedStartYear && years[i] <= selectedEndYear) {
+      output += `${years[i]},${values[i]}\n`;
+    }
+  }
+
+  const blob = new Blob([output], { type: "text/csv" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `${currentVariable}_filtered_${selectedStartYear}-${selectedEndYear}.csv`;
+  link.click();
+});
+
+document.getElementById("download-full").addEventListener("click", () => {
+  if (!originalCSV) return;
+
+  const blob = new Blob([originalCSV], { type: "text/csv" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `${currentVariable || "dataset"}.csv`;
+  link.click();
+});
+
+
+</script>
 
 </body>
     
