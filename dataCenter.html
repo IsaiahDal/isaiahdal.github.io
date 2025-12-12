@@ -56,27 +56,46 @@
       <!-- Add new datasets here -->
         <!-- IRS SOI -->
       <a href="https://www.irs.gov/statistics/soi-tax-stats-statistics-of-income" target="_blank"><h3>IRS Statistics of Income (SOI)</h3></a>
+
+      <!-- All Corporations -->
       <button id="allcorp" class="toc-entry" style="font-weight: bold;" onclick=
         "buildTablesFromCSV(
-          'allcorp.csv',
+          'DATA/allcorp.csv',
           'Total assets', 
           'Other liabilities',
           headers = ['Total assets', 'Total liabilities']
-        );"
+        ); toggleTOC();"
       ><p>All Corportations</p></button>
-      <button id="scorp" class="toc-entry"><p>S Corportations</p></button>
-      <button id="partners" class="toc-entry"><p>Partnerships</p></button>
-      <button id="soleprop" class="toc-entry"><p>Sole Proprietors</p></button>
+
+      <!-- S Corporations -->
+      <button id="scorp" class="toc-entry" onclick=
+        "buildTablesFromCSV(
+          'DATA/scorp.csv',
+          'Total assets', 
+          'Other liabilities',
+          headers = ['Total assets', 'Total liabilities']
+        ); toggleTOC();"
+      ><p>S Corportations</p></button>
+
+      <!-- Partnerships -->
+      <button id="partners" class="toc-entry" onclick=
+        "buildTablesFromCSV(
+          'DATA/partners.csv',
+          'Total assets', 
+          'Partners\' capital accounts',
+          headers = ['Total assets', 'Total liabilities and capital']
+        ); toggleTOC();"
+      ><p>Partnerships</p></button>
 
       <!-- BEA NIPA -->
       <a href="https://apps.bea.gov/iTable/?isuri=1&reqid=19&step=4&categories=flatfiles&nipa_table_list=1" target="_blank"><h3>BEA National Income and Product Accounts (NIPA)</h3></a>
       <button id="DomesticProductAndIncome" class="toc-entry" onclick=
         "buildTablesFromCSV(
-          'GDPGDI.csv',
+          'DATA/GDPGDI.csv',
           'Gross domestic product', 
           'Statistical discrepancy',
           headers = ['Gross domestic product', 'Gross domestic income']
-        );"
+        ); toggleTOC();"
       ><p> Gross Domestic Product And Income</p></button>
   </div>
 
@@ -367,16 +386,27 @@ function parseCSVLine(line) {
     } else if (char === '"') {
       inQuotes = !inQuotes;
     } else if (char === ',' && !inQuotes) {
-      result.push(current);
+      // First column stays as string, rest are parsed as numbers
+      if (result.length === 0) {
+        result.push(current); // Keep first column as string (with spaces for indentation)
+      } else {
+        const cleaned = current.trim().replace(/,/g, '');
+        const parsed = parseFloat(cleaned); // Use parseFloat instead of parseInt
+        result.push(isNaN(parsed) ? current : parsed);
+      }
       current = "";
     } else {
       current += char;
     }
   }
-  result.push(current);
+
+  // Handle the last value (always numeric)
+  const cleaned = current.trim().replace(/,/g, '');
+  const parsed = parseFloat(cleaned); // Use parseFloat instead of parseInt
+  result.push(isNaN(parsed) ? current : parsed);
+  
   return result;
 }
-
 
 let currentVariable = null;
 
@@ -392,7 +422,11 @@ function updateChartRange() {
   if (!row) return;
 
   const allYears = csvHeaders.slice(1).map(Number);
+
+  console.log("RAW ROW:", row);
   const allValues = row.slice(1).map(v => parseFloat(v));
+
+  console.log("PROCESSED ROW:", allValues);
 
   // Filter: keep points where year is within slider limits
   const filteredYears = [];
@@ -429,7 +463,16 @@ function renderChart(label, years, values) {
     },
     options: {
       responsive: true,
-      maintainAspectRatio: false
+      maintainAspectRatio: false,
+      scales: {
+      y: {
+        ticks: {
+          callback: function(value) {
+            return value.toString(); // no formatting
+          }
+        }
+      }
+    }
     },
     plugins: [{
       id: 'custom_canvas_background_color',
@@ -447,7 +490,7 @@ function renderChart(label, years, values) {
 
 // Call it with your CSV path:
 buildTablesFromCSV(
-  "allcorp.csv",
+  "DATA/allcorp.csv",
   "Total assets", 
   "Other liabilities",
   headers = ["Total assets", "Total liabilities"]
