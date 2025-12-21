@@ -263,9 +263,9 @@ This includes:
 
 ### DATA
 
-All data files used in the site.
+All data files used in the site and Data Center.
 
-### dataCenter.html (WIP)
+### datacenter.html (WIP)
 
 Used to visualize, manipulate, and download datasets.
 
@@ -285,6 +285,18 @@ All Pluto.jl notebooks, including both the source code and static HTML.
 
 Some basic coding and style standards.
 
-### styles.css
+### main.css
+
+CSS styles for index.html and datacenter.html.
+
+### lectures.css
 
 CSS styles for index.html.
+
+### datacenter.css
+
+CSS styles for datacenter.html.
+
+### datacenter.md
+
+Instructions for adding to or editing datacenter.html.
