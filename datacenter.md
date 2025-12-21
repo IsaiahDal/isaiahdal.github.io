@@ -2,7 +2,7 @@
 
 ## I. Adding a new dataset
 
-The site loads data from CSV files and dynamically builds nested list representations in the interface.
+The site loads data from CSV files and dynamically builds nested list representations for the site interface..
 
 ### 1. Format the CSV
 
@@ -13,13 +13,13 @@ The JavaScript function used to load data assumes the following CSV structure:
   * A variable nested under another variable **must appear below it** and have a **greater indent**.
   * Only the **relative amount of indentation** matters (e.g., 2 spaces vs. 4 spaces), not the absolute number.
 * For example, a CSV containing GDP data may look like:
-
-    "Gross Domestic Product", ...
-    "  Consumption", ...
-    "    Goods", ...
-    "    Services", ...
-    "  Investment", ...
-
+```
+"Gross Domestic Product", ...
+"  Consumption", ...
+"    Goods", ...
+"    Services", ...
+"  Investment", ...
+```
 * Each remaining column corresponds to a year.
   * The **first row of each column** must contain the year label (e.g., `1997`, `1998`, etc.).
 
@@ -29,22 +29,24 @@ Once the CSV is properly formatted, place it in the `DATA/` subdirectory.
 
 ### 2. Update `datacenter.html`
 
-1. Download `datacenter.html` and open it in a code editor.
+1. Download [datacenter.html](datacenter.html) and open it in a code editor.
 2. Use `Ctrl + F` (`Cmd + F` on macOS) to locate the following line:
-
-    <!-- Add new datasets here -->
+```
+<!-- Add new datasets here -->
+```
 
 3. Add a new dataset button using the following template:
-
-    <button id="idname" class="selection-entry" onclick=
-        "buildTables(
-          'csvName',
-          'startRow', 
-          'endRow',
-          headers = ['H1', 'H2'],
-          'source'
-        ); highlightDataset(this);"
-      ><p> DatasetName </p></button>
+```
+<button id="idname" class="selection-entry" onclick=
+    "buildTables(
+      'csvName',
+      'startRow', 
+      'endRow',
+      headers = ['H1', 'H2'],
+      'source'
+    ); highlightDataset(this);"
+  ><p> DatasetName </p></button>
+```
 
 #### Parameter definitions
 
@@ -74,7 +76,7 @@ Once the CSV is properly formatted, place it in the `DATA/` subdirectory.
 
 ---
 
-#### Example
+#### _Example_
 
 Suppose you want to add data from a CSV file called `pinkfloyd.csv`.
 
@@ -82,20 +84,20 @@ Suppose you want to add data from a CSV file called `pinkfloyd.csv`.
 * The final variable to include is `"   Pigs on the Wing (Part Two)"`.
 * The header variables are `"The Wall"` and `"Animals"`.
 * The source is `"Britannia Row"`.
-* The dataset name shown in the UI should be `"Pink Floyd"`.
+* The dataset name shown in the dataset selection menu should be `"Pink Floyd"`.
 
 The correct button definition is:
-
-    <button id="PinkFloyd" class="selection-entry" onclick=
-        "buildTables(
-          'pinkfloyd',
-          'The Wall', 
-          'Pigs on the Wing (Part Two)',
-          headers = ['The Wall', 'Animals'],
-          'Britannia Row'
-        ); highlightDataset(this);"
-      ><p> Pink Floyd </p></button>
-
+```
+<button id="PinkFloyd" class="selection-entry" onclick=
+    "buildTables(
+      'pinkfloyd',
+      'The Wall', 
+      'Pigs on the Wing (Part Two)',
+      headers = ['The Wall', 'Animals'],
+      'Britannia Row'
+    ); highlightDataset(this);"
+  ><p> Pink Floyd </p></button>
+```
 Once finished, upload the updated `datacenter.html` back to the repository.
 
 ---
@@ -120,20 +122,28 @@ To modify the site beyond simply adding a dataset (e.g., editing styles, JavaScr
 
 Because the site loads CSV files using JavaScript, it **must be served from a local web server**. Opening the HTML file directly will not work.
 
-One simple method uses Python:
+There are several ways to serve a file locally. One simple method uses Python:
 
-1. Open a terminal or command prompt.
-2. Navigate to the `LiveSite` directory:
-
-        cd path/to/LiveSite
-
-3. Start a local server:
-
-        python -m http.server 8000
-
-4. Open a web browser and go to:
-
-        http://localhost:8000
+1. Ensure python is installed by entering:
+```
+python --version
+```
+into a terminal. 
+* If the output appears similar to `python 3.X.X`, then Python is already installed and you may proceed.
+* Otherwise, [download Python](https://www.python.org/downloads/) first.
+3. Open a terminal or command prompt.
+4. Navigate to the `LiveSite` directory:
+```
+cd path/to/LiveSite
+```
+5. Start a local server:
+```
+python -m http.server 8000
+```
+6. Open a web browser and go to:
+```
+http://localhost:8000
+```
 
 You should now see the site running locally.
 
@@ -141,17 +151,7 @@ You should now see the site running locally.
 
 ### 3. Edit files
 
-While the server is running, you may edit any of the following:
-
-* **HTML**
-  * `index.html`
-  * `datacenter.html`
-* **JavaScript**
-  * Files in the `js/` directory
-* **CSS**
-  * Files in the `css/` directory
-* **Data**
-  * CSV files in the `DATA/` directory
+While the server is running, you may edit any of the HTML or CSS files contained in this repository.
 
 After saving changes:
 * Reload the page in your browser to see updates.
@@ -167,16 +167,8 @@ After saving changes:
   * **Console** tab to view JavaScript errors
   * **Network** tab to verify CSV files are loading correctly
 
-Common issues include:
-* Incorrect CSV filenames or paths
-* Mismatched `startRow` / `endRow` strings
-* Improper indentation in the CSV hierarchy
-
 ---
 
 ### 5. Upload changes
 
-Once you are satisfied with your edits:
-
-1. Commit your changes (if using Git), or
-2. Upload the modified files directly through the GitHub web interface.
+Once you are satisfied with your edits, upload any updated files to this repository.
